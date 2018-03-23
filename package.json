@@ -28,7 +28,16 @@
   },
   "homepage": "https://github.com/pierrecabriere/react-authmanager#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.1",
+    "babel-preset-react": "^6.24.1"
   },
   "dependencies": {
+    "flexible-cookies": "^1.0.2",
+    "react": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }
