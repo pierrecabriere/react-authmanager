@@ -42,6 +42,8 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
+*For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.*<br/>
+
 In addition, you will need to inject the token in the Authorization headers of each request made.<br/>
 To get the stored token, you can call `Authmanager.utils.getToken()`<br/>
 
@@ -58,8 +60,6 @@ axios.defaults.transformRequest.push((data, headers) => {
   return data;
 });
 ```
-
-*For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.*
 
 # 3 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
