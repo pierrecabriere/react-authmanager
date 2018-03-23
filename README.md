@@ -31,7 +31,10 @@ import { withAuth } from 'react-authmanager';
 @withAuth
 class LoginComponent extends React.Component {
   handleSubmit() {
-    const credentials = { email: 'hello@example.com', password: 'ThisIsASecret' }; // or whatever you want
+    const credentials = {
+      email: 'hello@example.com',
+      password: 'ThisIsASecret'
+    }; // or whatever data you want to send to the server
     this.props.login(credentials)
       .then(function() { alert('Hello !') })
   }
