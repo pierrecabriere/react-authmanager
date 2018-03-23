@@ -1,6 +1,14 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 class Config {
-  getToken = null;
-  getUser = null;
+  constructor() {
+    this.getToken = null;
+    this.getUser = null;
+  }
+
 }
 
-export default new Config()
+exports.default = new Config();

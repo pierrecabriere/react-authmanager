@@ -1,20 +1,13 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 class HOCManager {
-  constructor() {
-    this.getOpts = opts => {
-      return Object.assign({
-        acceptParameters: false
-      }, opts);
-    };
-  }
-
   // Gets the display name of a JSX component for dev tools
   getComponentDisplayName(Component) {
     return Component.displayName || Component.name || 'Unknown';
+  }
+
+  getOpts = opts => {
+    return Object.assign({
+      acceptParameters: false,
+    }, opts);
   }
 
   create(getComponent, opts) {
@@ -27,8 +20,8 @@ class HOCManager {
       }
 
       return ComposedComponent => getComponent(ComposedComponent, parameters);
-    };
+    }
   }
 }
 
-exports.default = new HOCManager();
+export default new HOCManager();

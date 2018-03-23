@@ -1,23 +1,39 @@
-import React from 'react';
-import HOCManager from '../lib/hoc-manager';
-import { connect } from 'react-redux';
-import Authmanager from '../';
+'use strict';
 
-export default HOCManager.create(Component => {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-  const ConnectedComponent = connect(
-    state => ({ user: state.user })
-  )(Component);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-  class WithUser extends React.Component {
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _hocManager = require('../lib/hoc-manager');
+
+var _hocManager2 = _interopRequireDefault(_hocManager);
+
+var _reactRedux = require('react-redux');
+
+var _index = require('../index');
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _hocManager2.default.create(Component => {
+
+  const ConnectedComponent = (0, _reactRedux.connect)(state => ({ user: state.user }))(Component);
+
+  class WithUser extends _react2.default.Component {
     render() {
       const props = this.props;
-      return <ConnectedComponent { ...props } store={Authmanager.store} />
+      return _react2.default.createElement(ConnectedComponent, _extends({}, props, { store: _index2.default.store }));
     }
   }
 
-  return WithUser
-
+  return WithUser;
 }, {
-  acceptParameters: false,
-})
+  acceptParameters: false
+});
