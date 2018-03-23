@@ -18,9 +18,9 @@ var _hocManager = require('../lib/hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 
-var _userActions = require('../actions/userActions');
+var _authActions = require('../actions/authActions');
 
-var userActions = _interopRequireWildcard(_userActions);
+var authActions = _interopRequireWildcard(_authActions);
 
 var _ = require('../');
 
@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _hocManager2.default.create(Component => {
 
-  const ConnectedComponent = (0, _reactRedux.connect)(null, dispatch => (0, _redux.bindActionCreators)(_extends({}, userActions), dispatch))(Component);
+  const ConnectedComponent = (0, _reactRedux.connect)(null, dispatch => (0, _redux.bindActionCreators)(_extends({}, authActions), dispatch))(Component);
 
   class WithAuth extends _react2.default.Component {
     render() {

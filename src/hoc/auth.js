@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import HOCManager from '../lib/hoc-manager';
-import * as userActions from '../actions/userActions';
+import * as authActions from '../actions/authActions';
 import Authmanager from '../';
 
 export default HOCManager.create(Component => {
 
+
   const ConnectedComponent = connect(
     null,
-    dispatch => bindActionCreators({ ...userActions }, dispatch)
+    dispatch => bindActionCreators({ ...authActions }, dispatch)
   )(Component);
 
   class WithAuth extends React.Component {
