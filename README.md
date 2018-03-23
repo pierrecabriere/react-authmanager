@@ -11,11 +11,8 @@
 
 - [1 - Installation](#1---installation)
 - [2 - Authenticate users](#2---authenticate-users)
-    - [2.1 - Usage](#21---usage)
 - [3 - Access users](#3---access-users)
-    - [3.1 - Usage](#31---usage)
 - [4 - Secure components](#4---secure-components)
-    - [4.1 - Usage](#41---usage)
 
 # 1 - Installation
 ```
@@ -23,8 +20,16 @@ yarn add react-authmanager
 ```
 
 # 2 - Authenticate users
+**withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
+**login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.<br/>
 
-## 2.1 - Usage
+| props      | default |                                                              |
+|:-----------|:--------|:-------------------------------------------------------------|
+| **login**  |         | function: send credentials to the server to get a token back |
+| **logout** |         | function: remove the stored token                            |
+| **auth** : |         | object: informations about the current state of operations   |
+| - loading  | false   | bool: is authentication (login or logout) currently loading  |
+
 ```js
 import { withAuth } from 'react-authmanager';
 
@@ -38,6 +43,13 @@ class LoginComponent extends React.Component {
     
     this.props.login(credentials)
       .then(function() { alert('Hello !') })
+  }
+  
+  render() {
+    if (this.props.auth.loading)
+      return (<MyLoadingComponent />);
+    
+    return ( ... );
   }
   
   ...
@@ -55,8 +67,16 @@ class LogoutComponent extends React.Component {
 ```
 
 # 3 - Access users
+**withUser** HOC will automatically inject an user object in your props component.<br/>
+This object contains informations about the current user :<br/>
 
-## 3.1 - Usage
+| props      | default |                                                     |
+|:-----------|:--------|:----------------------------------------------------|
+| **user** : |         | object: containing current user informations        |
+| - loading  | false   | bool: is user currently loaded from the server      |
+| - logged   | false   | bool: is user currently logged                      |
+| - ...      | null    | any: informations about the user sent by the server |
+
 ```js
 import { withUser } from 'react-authmanager';
 
@@ -74,8 +94,6 @@ class MyComponent extends React.Component {
 ```
 
 # 4 - Secure components
-
-## 4.1 - Usage
 ```js
 import { withGuard } from 'react-authmanager';
 
