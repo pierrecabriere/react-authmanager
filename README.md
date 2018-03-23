@@ -112,12 +112,12 @@ class LogoutComponent extends React.Component {
 **withUser** HOC will automatically inject an user object in your props component.<br/>
 This object contains informations about the current user :<br/>
 
-| prop       | default | description                                                                              |
-|:-----------|:--------|:-----------------------------------------------------------------------------------------|
-| user:      |         | `object` containing current user informations                                            |
-| -- loading | false   | `bool` is user currently loaded from the server                                          |
-| -- logged  | false   | `bool` is the current user logged in (setted by [isUserLogged](#isuserloggeduser-async)) |
-| -- ...     | null    | `any` informations about the user sent by the server                                     |
+| prop       | default | description                                                                                        |
+|:-----------|:--------|:---------------------------------------------------------------------------------------------------|
+| user:      |         | `object` containing current user informations                                                      |
+| -- loading | false   | `bool` is user currently loaded from the server                                                    |
+| -- logged  | false   | `bool` is the current user logged in (setted by [isUserLogged](#isuserloggeduser-async))           |
+| -- ...     | null    | `any` informations about the user sent by the server (setted by [getUser](#getuser-async)) |
 
 ```js
 import { withUser } from 'react-authmanager';
@@ -172,6 +172,15 @@ class MyComponent extends React.Component {
 ```
 
 # 6 - Advanced configuration
+
+To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object :
+```js
+import Authmanager from 'react-authmanager'
+
+Authmanager.config.getToken = function(credentials) {
+  // here you should return a token, see the configuration below
+}
+```
 
 ## `getToken([credentials]) [async]`
 Get an authentication token when an user try to login. `getToken` is called when the auth login function is executed.
