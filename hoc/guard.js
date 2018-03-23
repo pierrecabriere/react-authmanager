@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -23,7 +25,7 @@ exports.default = _hocManager2.default.create((Component, parameters) => {
   class WithGuard extends _react2.default.Component {
     render() {
       const { user } = this.props;
-      const next = () => _react2.default.createElement(Component, this.props);
+      const next = value => _react2.default.createElement(Component, _extends({}, this.props, { guard: value }));
 
       let guard = parameters[0];
       if ('string' === typeof guard) guard = _config2.default.guards[guard];

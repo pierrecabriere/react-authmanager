@@ -7,7 +7,7 @@ export default HOCManager.create((Component, parameters) => {
   class WithGuard extends React.Component {
     render() {
       const { user } = this.props;
-      const next = () =>  <Component { ...this.props } />;
+      const next = value =>  <Component { ...this.props } guard={value} />;
 
       let guard = parameters[0];
       if ('string' === typeof guard)
