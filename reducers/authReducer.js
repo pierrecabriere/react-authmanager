@@ -6,38 +6,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _userTypes = require('../types/userTypes');
+var _authTypes = require('../types/authTypes');
 
-var types = _interopRequireWildcard(_userTypes);
-
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var types = _interopRequireWildcard(_authTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 const initialState = {
-  loading: false,
-  logged: false
+  loading: false
 };
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_START:
+    case types.LOGIN_START:
+    case types.LOGOUT_START:
       return _extends({}, state, {
         loading: true
       });
-    case types.FETCH_END:
+    case types.LOGIN_END:
+    case types.LOGOUT_END:
       return _extends({}, state, {
         loading: false
-      });
-    case types.FETCH_ERROR:
-      return initialState;
-    case types.FETCH_SUCCESS:
-      return _extends({}, state, action.payload, {
-        logged: _config2.default.isUserLogged(action.payload)
       });
     default:
       return state;

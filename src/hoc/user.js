@@ -7,7 +7,7 @@ import Authmanager from '../';
 export default HOCManager.create(Component => {
 
   const ConnectedComponent = connect(
-    state => ({ user: state.user })
+    state => state
   )(Component);
 
   class WithUser extends React.Component {

@@ -10,10 +10,15 @@ var _userReducer = require('./userReducer');
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
+var _authReducer = require('./authReducer');
+
+var _authReducer2 = _interopRequireDefault(_authReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const rootReducer = (0, _redux.combineReducers)({
-  user: _userReducer2.default
+  user: _userReducer2.default,
+  auth: _authReducer2.default
 });
 
 exports.default = rootReducer;

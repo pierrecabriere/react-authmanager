@@ -1,11 +1,5 @@
 import userService from '../services/userService';
-
-export const types = {
-  FETCH_SUCCESS: 'USER_FETCH_SUCCESS',
-  FETCH_START: 'USER_FETCH_START',
-  FETCH_END: 'USER_FETCH_END',
-  FETCH_ERROR: 'USER_FETCH_ERROR'
-};
+import * as types from '../types/userTypes';
 
 export const fetchStart = () => ({
   type: types.FETCH_START

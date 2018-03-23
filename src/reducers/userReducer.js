@@ -1,4 +1,4 @@
-import { types } from '../actions/userActions';
+import * as types from '../types/userTypes';
 import config from '../config';
 
 const initialState = {

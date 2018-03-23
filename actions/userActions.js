@@ -3,20 +3,19 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetch = exports.fetchSuccess = exports.fetchError = exports.fetchEnd = exports.fetchStart = exports.types = undefined;
+exports.fetch = exports.fetchSuccess = exports.fetchError = exports.fetchEnd = exports.fetchStart = undefined;
 
 var _userService = require('../services/userService');
 
 var _userService2 = _interopRequireDefault(_userService);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _userTypes = require('../types/userTypes');
 
-const types = exports.types = {
-  FETCH_SUCCESS: 'USER_FETCH_SUCCESS',
-  FETCH_START: 'USER_FETCH_START',
-  FETCH_END: 'USER_FETCH_END',
-  FETCH_ERROR: 'USER_FETCH_ERROR'
-};
+var types = _interopRequireWildcard(_userTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const fetchStart = exports.fetchStart = () => ({
   type: types.FETCH_START

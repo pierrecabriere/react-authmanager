@@ -8,9 +8,11 @@ import Authmanager from '../';
 
 export default HOCManager.create(Component => {
 
+  const propsActions = { login: authActions.login, logout: authActions.logout };
+
   const ConnectedComponent = connect(
-    null,
-    dispatch => bindActionCreators(authActions, dispatch)
+    state => state,
+    dispatch => bindActionCreators(propsActions, dispatch)
   )(Component);
 
   class WithAuth extends React.Component {

@@ -32,7 +32,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _hocManager2.default.create(Component => {
 
-  const ConnectedComponent = (0, _reactRedux.connect)(null, dispatch => (0, _redux.bindActionCreators)(authActions, dispatch))(Component);
+  const propsActions = { login: authActions.login, logout: authActions.logout };
+
+  const ConnectedComponent = (0, _reactRedux.connect)(state => state, dispatch => (0, _redux.bindActionCreators)(propsActions, dispatch))(Component);
 
   class WithAuth extends _react2.default.Component {
     render() {
