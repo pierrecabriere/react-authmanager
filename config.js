@@ -7,6 +7,9 @@ class Config {
   constructor() {
     this.getToken = null;
     this.getUser = null;
+
+    this.isUserLogged = user => null !== user;
+
     this.guards = {};
   }
 
