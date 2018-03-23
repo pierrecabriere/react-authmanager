@@ -8,7 +8,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _hocManager = require('../lib/hoc-manager');
+var _hocManager = require('hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 

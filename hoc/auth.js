@@ -14,7 +14,7 @@ var _reactRedux = require('react-redux');
 
 var _redux = require('redux');
 
-var _hocManager = require('../lib/hoc-manager');
+var _hocManager = require('hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 

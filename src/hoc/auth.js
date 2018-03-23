@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import HOCManager from 'hoc-manager';
 
-import HOCManager from '../lib/hoc-manager';
 import * as authActions from '../actions/authActions';
 import Authmanager from '../';
 

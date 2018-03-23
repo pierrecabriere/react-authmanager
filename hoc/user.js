@@ -12,7 +12,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = require('react-redux');
 
-var _hocManager = require('../lib/hoc-manager');
+var _hocManager = require('hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 
