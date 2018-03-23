@@ -112,12 +112,12 @@ class LogoutComponent extends React.Component {
 **withUser** HOC will automatically inject an user object in your props component.<br/>
 This object contains informations about the current user :<br/>
 
-| prop       | default | description                                          |
-|:-----------|:--------|:-----------------------------------------------------|
-| user:      |         | `object` containing current user informations        |
-| -- loading | false   | `bool` is user currently loaded from the server      |
-| -- logged  | false   | `bool` is user currently logged                      |
-| -- ...     | null    | `any` informations about the user sent by the server |
+| prop       | default | description                                                                              |
+|:-----------|:--------|:-----------------------------------------------------------------------------------------|
+| user:      |         | `object` containing current user informations                                            |
+| -- loading | false   | `bool` is user currently loaded from the server                                          |
+| -- logged  | false   | `bool` is the current user logged in (setted by [isUserLogged](#isuserloggeduser-async)) |
+| -- ...     | null    | `any` informations about the user sent by the server                                     |
 
 ```js
 import { withUser } from 'react-authmanager';
