@@ -22,7 +22,8 @@ yarn add react-authmanager
 # 2 - Minimal configuration
 
 To properly work, **react-authmanager** needs to know how to get the current user from the server and how to get the token from the login response.<br/>
-The simplest way to configure the manager is to import it and change its default config.<br/>
+The simplest way to configure the manager is to import it and change its config object.<br/>
+You need to define the configuration before starting to use the toolkit, so the best place to configure the manager is the `index.js` or `App.js` file.
 
 **example with axios**
 ```js
@@ -42,7 +43,7 @@ Authmanager.config.getUser = async () => {
 ```
 
 In addition, you will need to inject the token in the Authorization headers of each request made.<br/>
-To get the stored token, you can call `Authmanager.utils.getToken()`.<br/>
+To get the stored token, you can call `Authmanager.utils.getToken()`<br/>
 
 **example with axios**
 ```js
@@ -58,7 +59,7 @@ axios.defaults.transformRequest.push((data, headers) => {
 });
 ```
 
-> For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.
+*For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.*
 
 # 3 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
