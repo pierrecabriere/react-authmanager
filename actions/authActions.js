@@ -1,5 +1,5 @@
-import authService from './authService';
-import userService from './userService';
+import authService from '../services/authService';
+import userService from '../services/userService';
 import { fetchSuccess } from './userActions';
 
 export const login = credentials => {

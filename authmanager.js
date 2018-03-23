@@ -1,7 +1,7 @@
 import config from './config';
 import utils from './utils';
 
-class ReactAuthGuard {
+class Authmanager {
   config = config;
   utils = utils;
   _store = null;
@@ -14,4 +14,4 @@ class ReactAuthGuard {
   }
 }
 
-export default new ReactAuthGuard();
+export default new Authmanager();
