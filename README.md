@@ -25,10 +25,10 @@ yarn add react-authmanager
 
 | props      | default |                                                              |
 |:-----------|:--------|:-------------------------------------------------------------|
-| **login**  |         | function: send credentials to the server to get a token back |
-| **logout** |         | function: remove the stored token                            |
-| **auth** : |         | object: informations about the current state of operations   |
-| - loading  | false   | bool: is authentication (login or logout) currently loading  |
+| **login**  |         | `function` send credentials to the server to get a token back |
+| **logout** |         | `function` remove the stored token                            |
+| **auth** : |         | `object` informations about the current state of operations   |
+| - loading  | false   | `bool` is authentication (login or logout) currently loading  |
 
 ```js
 import { withAuth } from 'react-authmanager';
@@ -72,10 +72,10 @@ This object contains informations about the current user :<br/>
 
 | props      | default |                                                     |
 |:-----------|:--------|:----------------------------------------------------|
-| **user** : |         | object: containing current user informations        |
-| - loading  | false   | bool: is user currently loaded from the server      |
-| - logged   | false   | bool: is user currently logged                      |
-| - ...      | null    | any: informations about the user sent by the server |
+| **user** : |         | `object` containing current user informations        |
+| - loading  | false   | `bool` is user currently loaded from the server      |
+| - logged   | false   | `bool` is user currently logged                      |
+| - ...      | null    | `any` informations about the user sent by the server |
 
 ```js
 import { withUser } from 'react-authmanager';
