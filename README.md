@@ -140,11 +140,11 @@ class MyComponent extends React.Component {
 It needs a guard as parameter. A guard is just a function that returns a component, so you can easily create your own guards.<br/>
 A guard function has some parameters:<br/>
 
-|           |                                                          |
-|:----------|:---------------------------------------------------------|
-| **user**  | `object` the current user object                         |
-| **next**  | `function` a function that returns the current Component |
-| **props** | `object` the current component props                     |
+| prop  | description                                              |
+|:------|:---------------------------------------------------------|
+| user  | `object` the current user object                         |
+| next  | `function` a function that returns the current Component |
+| props | `object` the current component props                     |
 
 ```js
 import { withGuard } from 'react-authmanager';
