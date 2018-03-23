@@ -8,7 +8,6 @@ import Authmanager from '../';
 
 export default HOCManager.create(Component => {
 
-
   const ConnectedComponent = connect(
     null,
     dispatch => bindActionCreators({ ...authActions }, dispatch)
