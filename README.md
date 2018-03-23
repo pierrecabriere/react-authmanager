@@ -9,13 +9,13 @@
 
 ---
 
-- [Installation](#1---installation)
-- [Authenticate users](#2---authenticate-users)
-    - [Usage](#21---usage)
-- [Access users](#3---access-users)
-    - [Usage](#31---usage)
-- [Secure components](#4---secure-components)
-    - [Usage](#41---usage)
+- [1 - Installation](#1---installation)
+- [2 - Authenticate users](#2---authenticate-users)
+    - [2.1 - Usage](#21---usage)
+- [3 - Access users](#3---access-users)
+    - [3.1 - Usage](#31---usage)
+- [4 - Secure components](#4---secure-components)
+    - [4.1 - Usage](#41---usage)
 
 # 1 - Installation
 ```
