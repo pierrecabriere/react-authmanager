@@ -12,6 +12,7 @@
 - [Authenticate users](#3---authenticate-users)
 - [Access users](#4---access-users)
 - [Secure components](#5---secure-components)
+- [Advanced configuration](#6---advanced-configuration)
 
 # 1 - Installation
 ```
@@ -20,7 +21,44 @@ yarn add react-authmanager
 
 # 2 - Minimal configuration
 
-> Documentation to come
+To properly work, **react-authmanager** needs to know how to get the current user from the server and how to get the token from the login response.<br/>
+The simplest way to configure the manager is to import it and change its default config.<br/>
+
+**example with axios**
+```js
+import axios from 'axios'
+import Authmanager from 'react-authmanager';
+
+// credentials is an object that you will define later (see the next section below on how to authenticate users)
+Authmanager.config.getToken = async credentials => {
+  const { data } = await axios.post('https://example.com/login', credentials);
+  return data.token;
+}
+
+Authmanager.config.getUser = async () => {
+  const { data } = await axios.get('https://example.com/user');
+  return data;
+}
+```
+
+In addition, you will need to inject the token in the Authorization headers of each request made.<br/>
+To get the stored token, you can call `Authmanager.utils.getToken()`.<br/>
+
+**example with axios**
+```js
+import axios from 'axios'
+import Authmanager from 'react-authmanager';
+
+axios.defaults.transformRequest.push((data, headers) => {
+  const token = Authmanager.utils.getToken(); // returns null if no token is stored
+  if (token)
+    headers.common['Authorization'] = `Bearer ${token}`;
+
+  return data;
+});
+```
+
+> For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.
 
 # 3 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
@@ -42,7 +80,7 @@ class LoginComponent extends React.Component {
     const credentials = {
       email: 'hello@example.com',
       password: 'ThisIsASecret'
-    }; // or whatever data you want to send to the server
+    }; // or whatever data you want to send to the server (see the getToken configuration in the Minimal configuration section above)
     
     this.props.login(credentials)
       .then(function() { alert('Hello !') })
@@ -131,5 +169,9 @@ class MyComponent extends React.Component {
   ...
 }
 ```
+
+# 6 - Advanced configuration
+
+> More documentation to come
 
 # 🚀
