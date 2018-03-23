@@ -65,12 +65,12 @@ axios.defaults.transformRequest.push((data, headers) => {
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
 **login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.<br/>
 
-|            |       |                                                               |
-|:-----------|:------|:--------------------------------------------------------------|
-| **login**  |       | `function` send credentials to the server to get a token back |
-| **logout** |       | `function` remove the stored token                            |
-| **auth** : |       | `object` informations about the current state of operations   |
-| -- loading | false | `bool` is authentication (login or logout) currently loading  |
+| prop       | default | description                                                   |
+|:-----------|:--------|:--------------------------------------------------------------|
+| login      |         | `function` send credentials to the server to get a token back |
+| logout     |         | `function` remove the stored token                            |
+| auth:      |         | `object` informations about the current state of operations   |
+| -- loading | false   | `bool` is authentication (login or logout) currently loading  |
 
 ```js
 import { withAuth } from 'react-authmanager';
@@ -112,12 +112,12 @@ class LogoutComponent extends React.Component {
 **withUser** HOC will automatically inject an user object in your props component.<br/>
 This object contains informations about the current user :<br/>
 
-|            |       |                                                      |
-|:-----------|:------|:-----------------------------------------------------|
-| **user** : |       | `object` containing current user informations        |
-| -- loading  | false | `bool` is user currently loaded from the server      |
-| -- logged   | false | `bool` is user currently logged                      |
-| -- ...      | null  | `any` informations about the user sent by the server |
+| prop       | default | description                                          |
+|:-----------|:--------|:-----------------------------------------------------|
+| user:      |         | `object` containing current user informations        |
+| -- loading | false   | `bool` is user currently loaded from the server      |
+| -- logged  | false   | `bool` is user currently logged                      |
+| -- ...     | null    | `any` informations about the user sent by the server |
 
 ```js
 import { withUser } from 'react-authmanager';
@@ -173,6 +173,68 @@ class MyComponent extends React.Component {
 
 # 6 - Advanced configuration
 
-> More documentation to come
+## `getToken([credentials]) [async]`
+Get an authentication token when an user try to login. `getToken` is called when the auth login function is executed.
+
+**Parameters**<br/>
+- [`credentials`] *(Object)* Arguments passed by the login function.
+
+**Return *(String)***<br/>
+Need to return a token that will be stored
+
+**default**<br/>
+```js
+getToken = null;
+```
+
+**example**
+```js
+Authmanager.config.getToken = async credentials => {
+  const { data } = await axios.post('https://example.com/login', credentials);
+  return data.token;
+}
+```
+
+## `getUser() [async]`
+Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
+
+**Return *(Object)***<br/>
+Need to return a token that will be stored
+
+**default**<br/>
+```js
+getUser = null;
+```
+
+**example**
+```js
+Authmanager.config.getUser = async () => {
+ const { data } = await axios.get('https://example.com/user');
+ return data;
+}
+```
+
+## `isUserLogged([user]) [async]`
+Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
+
+**Parameters**<br/>
+- [`user`] *(Object)* Object returned by the `getUser`.
+
+**Return *(Boolean)***<br/>
+Need to return a boolean that tell if the current user (returned by `getUser`) is logged.
+
+**default**<br/>
+```js
+isUserLogged = user => null !== user;
+```
+*By default, `isUserLogged` returns true if `getUser` returns something different than null*
+
+**example**
+```js
+Authmanager.config.getUser = async () => {
+ const { data } = await axios.get('https://example.com/user');
+ return data;
+}
+```
 
 # 🚀
