@@ -65,12 +65,12 @@ axios.defaults.transformRequest.push((data, headers) => {
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
 **login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.<br/>
 
-| props      | default |                                                              |
-|:-----------|:--------|:-------------------------------------------------------------|
-| **login**  |         | `function` send credentials to the server to get a token back |
-| **logout** |         | `function` remove the stored token                            |
-| **auth** : |         | `object` informations about the current state of operations   |
-| - loading  | false   | `bool` is authentication (login or logout) currently loading  |
+|            |       |                                                               |
+|:-----------|:------|:--------------------------------------------------------------|
+| **login**  |       | `function` send credentials to the server to get a token back |
+| **logout** |       | `function` remove the stored token                            |
+| **auth** : |       | `object` informations about the current state of operations   |
+| -- loading | false | `bool` is authentication (login or logout) currently loading  |
 
 ```js
 import { withAuth } from 'react-authmanager';
@@ -112,12 +112,12 @@ class LogoutComponent extends React.Component {
 **withUser** HOC will automatically inject an user object in your props component.<br/>
 This object contains informations about the current user :<br/>
 
-| props      | default |                                                     |
-|:-----------|:--------|:----------------------------------------------------|
-| **user** : |         | `object` containing current user informations        |
-| - loading  | false   | `bool` is user currently loaded from the server      |
-| - logged   | false   | `bool` is user currently logged                      |
-| - ...      | null    | `any` informations about the user sent by the server |
+|            |       |                                                      |
+|:-----------|:------|:-----------------------------------------------------|
+| **user** : |       | `object` containing current user informations        |
+| -- loading  | false | `bool` is user currently loaded from the server      |
+| -- logged   | false | `bool` is user currently logged                      |
+| -- ...      | null  | `any` informations about the user sent by the server |
 
 ```js
 import { withUser } from 'react-authmanager';
@@ -140,7 +140,7 @@ class MyComponent extends React.Component {
 It needs a guard as parameter. A guard is just a function that returns a component, so you can easily create your own guards.<br/>
 A guard function has some parameters:<br/>
 
-| parameter |                                                          |
+|           |                                                          |
 |:----------|:---------------------------------------------------------|
 | **user**  | `object` the current user object                         |
 | **next**  | `function` a function that returns the current Component |
