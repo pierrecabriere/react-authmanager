@@ -35,6 +35,7 @@ class LoginComponent extends React.Component {
       email: 'hello@example.com',
       password: 'ThisIsASecret'
     }; // or whatever data you want to send to the server
+    
     this.props.login(credentials)
       .then(function() { alert('Hello !') })
   }
