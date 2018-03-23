@@ -1,9 +1,10 @@
 import React from 'react';
-import HOCManager from '../lib/hoc-manager';
-import * as userActions from 'actions/userActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Authmanager from '../index';
+
+import HOCManager from '../lib/hoc-manager';
+import * as userActions from '../actions/userActions';
+import Authmanager from '../';
 
 export default HOCManager.create(Component => {
 

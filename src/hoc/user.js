@@ -1,7 +1,8 @@
 import React from 'react';
-import HOCManager from '../lib/hoc-manager';
 import { connect } from 'react-redux';
-import Authmanager from '../index';
+
+import HOCManager from '../lib/hoc-manager';
+import Authmanager from '../';
 
 export default HOCManager.create(Component => {
 

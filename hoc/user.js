@@ -10,15 +10,15 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _hocManager = require('../lib/hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 
-var _reactRedux = require('react-redux');
+var _ = require('../');
 
-var _index = require('../index');
-
-var _index2 = _interopRequireDefault(_index);
+var _2 = _interopRequireDefault(_);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29,7 +29,7 @@ exports.default = _hocManager2.default.create(Component => {
   class WithUser extends _react2.default.Component {
     render() {
       const props = this.props;
-      return _react2.default.createElement(ConnectedComponent, _extends({}, props, { store: _index2.default.store }));
+      return _react2.default.createElement(ConnectedComponent, _extends({}, props, { store: _2.default.store }));
     }
   }
 

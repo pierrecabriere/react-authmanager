@@ -8,13 +8,13 @@ var _flexibleCookies = require('flexible-cookies');
 
 var _redux = require('redux');
 
-var _rootReducer = require('src/reducers/rootReducer');
-
-var _rootReducer2 = _interopRequireDefault(_rootReducer);
-
 var _reduxThunk = require('redux-thunk');
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var _rootReducer = require('./reducers/rootReducer');
+
+var _rootReducer2 = _interopRequireDefault(_rootReducer);
 
 var _userActions = require('./actions/userActions');
 

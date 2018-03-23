@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HOCManager from '../lib/hoc-manager';
 
 export default HOCManager.create((Component, parameters) => {
