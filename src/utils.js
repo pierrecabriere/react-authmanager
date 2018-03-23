@@ -2,6 +2,7 @@ import { Cookies } from 'flexible-cookies';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
+import config from './config';
 import rootReducer from './reducers/rootReducer';
 import { fetch as fetchUser } from './actions/userActions';
 
@@ -12,10 +13,12 @@ class Utils {
 
   setToken = token => {
     Cookies.set('JWT-AUTH', token);
+    return true;
   }
 
   deleteToken = () => {
     Cookies.delete('JWT-AUTH');
+    return true;
   }
 
   createStore = () => {
@@ -27,7 +30,13 @@ class Utils {
 
     // load user
     store.dispatch(fetchUser());
+
     return store;
+  }
+
+  createGuard = (name, guard) => {
+    config.guards[name] = guard;
+    return guard;
   }
 }
 

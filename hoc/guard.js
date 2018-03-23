@@ -12,6 +12,10 @@ var _hocManager = require('hoc-manager');
 
 var _hocManager2 = _interopRequireDefault(_hocManager);
 
+var _config = require('../config');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _hocManager2.default.create((Component, parameters) => {
@@ -21,7 +25,9 @@ exports.default = _hocManager2.default.create((Component, parameters) => {
       const { user } = this.props;
       const next = () => _react2.default.createElement(Component, this.props);
 
-      const guard = parameters[0];
+      let guard = parameters[0];
+      if ('string' === typeof guard) guard = _config2.default.guards[guard];
+
       return guard(user, next, this.props) || null;
     }
   }
