@@ -1,7 +1,7 @@
 {
   "name": "react-authmanager",
   "version": "0.1.0",
-  "description": "",
+  "description": "Integrates an authentication system based on JWT in your react app, in a simple way !",
   "main": "index.js",
   "scripts": {
     "build": "babel ./src -d ./",
@@ -14,6 +14,12 @@
     "url": "git+https://github.com/pierrecabriere/react-authmanager.git"
   },
   "keywords": [
+    "authentication",
+    "JWT",
+    "react",
+    "redux",
+    "user",
+    "guard"
   ],
   "author": "hello@pierrecabriere.fr",
   "license": "MIT",
