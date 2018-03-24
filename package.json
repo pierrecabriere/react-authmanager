@@ -38,6 +38,7 @@
     "codecov": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "istanbul": "^0.4.5",
     "jest": "^22.4.3",
     "jest-localstorage-mock": "^2.2.0"
   },
