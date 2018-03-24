@@ -12,8 +12,9 @@
 - [Authenticate users](#2---authenticate-users)
 - [Access user informations](#3---access-user-informations)
 - [Secure components](#4---secure-components)
-- [Advanced configuration](#5---advanced-configuration)
-- [Utilities](#6---utilities)
+- [Authmanager](#5---authmanager)
+    - [Authmanager.config](#51---authmanagerconfig)
+    - [Authmanager.utils](#52---authmanagerutils)
 
 ## 1 - Getting started
 `npm install --save react-authmanager`, then you have to configure some points before starting to use the toolkit.<br/>
@@ -60,7 +61,7 @@ fetch(..., {
 });
 ```
 
-*For more configurations, please read the [advanced configuration](#5---advanced-configuration) section below.*
+*For more configurations, please read the [Authmanager](#5---authmanager) section below.*
 
 ## 2 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
@@ -172,7 +173,9 @@ class MyComponent extends React.Component {
 }
 ```
 
-## 5 - Advanced configuration
+## 5 - Authmanager
+
+### 5.1 - `Authmanager.config`
 To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object:
 ```js
 import Authmanager from 'react-authmanager';
@@ -181,7 +184,7 @@ import Authmanager from 'react-authmanager';
 Authmanager.config.getToken = function(credentials) {}
 ```
 
-### `config.getToken([credentials]) [async]`
+#### `config.getToken([credentials]) [async]`
 Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed to store the token in *localStorage*.
 
 **Parameters**
@@ -205,7 +208,7 @@ Authmanager.config.getToken = async credentials => {
 }
 ```
 
-### `config.getUser() [async]`
+#### `config.getUser() [async]`
 Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
 
 **Return *(Object)***
@@ -226,7 +229,7 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
-### `config.isUserLogged([user]) [async]`
+#### `config.isUserLogged([user]) [async]`
 Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
 
 **Parameters**
@@ -251,8 +254,8 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
-## 6 - Utilities
-**react-authmanager** also provides some utilities to manage the toolkit from your app:
+### 5.2 - `Authmanager.utils`
+**react-authmanager** also provides some utilities by the `Authmanager` to manage the toolkit from your app:
 ```js
 import Authmanager from 'react-authmanager';
 
@@ -260,7 +263,7 @@ import Authmanager from 'react-authmanager';
 const Authmanager.utils.getToken()
 ```
 
-### `utils.getToken()`
+#### `utils.getToken()`
 Returns the current stored token (in *localStorage*). You should use `getToken` to authorize your requests to the server
 
 **Return *(String)***
@@ -278,7 +281,7 @@ axios.defaults.transformRequest.push((data, headers) => {
 });
 ```
 
-### `utils.getStore()`
+#### `utils.getStore()`
 Returns the redux store of the toolkit. You should not have to use this function
 
 **Return *(Object)***
