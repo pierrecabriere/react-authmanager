@@ -25,11 +25,11 @@ Authmanager.config.getToken = function(credentials) {}
 ```
 
 **react-authmanager** needs:
-- to know how to login the user from the server and get a token back ([`config.getToken`](#gettokencredentials-async))
-- to know how to get the current logged user informations from the server ([`config.getUser`](#getuser-async))
+- to know how to login the user from the server and get a token back ([`config.getToken`](#configgettokencredentials-async))
+- to know how to get the current logged user informations from the server ([`config.getUser`](#configgetuser-async))
 
 **you** will need:
-- to include the current token in your requests headers authorization ([`utils.getToken`](#gettoken))
+- to include the current token in your requests headers authorization ([`utils.getToken`](#utilsgettoken))
 
 ### Minimal configuration for the toolkit
 ```js
@@ -59,11 +59,11 @@ fetch(..., {
 });
 ```
 
-*For more configurations, please read the [advanced configuration](#5---advanced-configuration) section below.*<br/>
+*For more configurations, please read the [advanced configuration](#5---advanced-configuration) section below.*
 
 ## 2 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
-**login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.<br/>
+**login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.
 
 | prop       | default | description                                                   |
 |:-----------|:--------|:--------------------------------------------------------------|
@@ -110,14 +110,14 @@ class LogoutComponent extends React.Component {
 
 ## 3 - Access user informations
 **withUser** HOC will automatically inject an user object in your component props.<br/>
-This object contains informations about the current user :<br/>
+This object contains informations about the current user:
 
-| prop       | default | description                                                                                         |
-|:-----------|:--------|:----------------------------------------------------------------------------------------------------|
-| user:      |         | `object` containing current user informations                                                       |
-| -- loading | false   | `bool` is user currently loaded from the server                                                     |
-| -- logged  | false   | `bool` is the current user logged in (setted by [`config.isUserLogged`](#isuserloggeduser-async))   |
-| -- ...     | null    | `any` informations about the user sent by the server (setted by [`config.getUser`](#getuser-async)) |
+| prop       | default | description                                                                                             |
+|:-----------|:--------|:--------------------------------------------------------------------------------------------------------|
+| user:      |         | `object` containing current user informations                                                           |
+| -- loading | false   | `bool` is user currently loaded from the server                                                         |
+| -- logged  | false   | `bool` is the current user logged in (setted by [`config.isUserLogged`](#configisuserloggeduser-async)) |
+| -- ...     | null    | `any` informations about the user sent by the server (setted by [`config.getUser`](#configgetuser-async))    |
 
 ```js
 import { withUser } from 'react-authmanager';
@@ -138,7 +138,7 @@ class MyComponent extends React.Component {
 ## 4 - Secure components
 **withGuard** HOC helps you protect your components in a flexible way. By example, you can render a login form instead of a component if no user is logged in.<br/>
 It needs a guard as parameter. A guard is just a function that returns a component, so you can easily create your own guards.<br/>
-A guard function has some parameters:<br/>
+A guard function has parameters:
 
 | prop  | description                                              |
 |:------|:---------------------------------------------------------|
@@ -172,7 +172,7 @@ class MyComponent extends React.Component {
 ```
 
 ## 5 - Advanced configuration
-To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object :
+To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object:
 ```js
 import Authmanager from 'react-authmanager';
 
@@ -180,7 +180,7 @@ import Authmanager from 'react-authmanager';
 Authmanager.config.getToken = function(credentials) {}
 ```
 
-### `getToken([credentials]) [async]`
+### `config.getToken([credentials]) [async]`
 Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed to store the token in *localStorage*.
 
 **Parameters**
@@ -204,7 +204,7 @@ Authmanager.config.getToken = async credentials => {
 }
 ```
 
-### `getUser() [async]`
+### `config.getUser() [async]`
 Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
 
 **Return *(Object)***
@@ -225,7 +225,7 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
-### `isUserLogged([user]) [async]`
+### `config.isUserLogged([user]) [async]`
 Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
 
 **Parameters**
@@ -259,7 +259,7 @@ import Authmanager from 'react-authmanager';
 const Authmanager.utils.getToken()
 ```
 
-### `getToken()`
+### `utils.getToken()`
 Returns the current stored token (in *localStorage*). You should use `getToken` to authorize your requests to the server
 
 **Return *(String)***

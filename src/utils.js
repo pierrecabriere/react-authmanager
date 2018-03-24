@@ -71,7 +71,7 @@ if (!window.localStorage) {
 
 class Utils {
   getToken = () => {
-    return localStorage.getItem(JWT_NAME)
+    return localStorage.getItem(JWT_NAME);
   }
 
   setToken = token => {
