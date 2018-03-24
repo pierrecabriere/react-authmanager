@@ -44,11 +44,15 @@
     "flexible-cookies": "^1.0.2",
     "hoc-manager": "^1.1.0",
     "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "jest": {
-    "setupFiles": ["jest-localstorage-mock", "./test/setup"]
+    "setupFiles": [
+      "jest-localstorage-mock",
+      "./test/setup"
+    ]
   }
 }
