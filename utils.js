@@ -114,7 +114,7 @@ class Utils {
     };
 
     this.deleteToken = () => {
-      localStorage.setItem(JWT_NAME, null);
+      localStorage.removeItem(JWT_NAME);
       return true;
     };
 
