@@ -18,7 +18,7 @@ export default HOCManager.create(Component => {
   class WithAuth extends React.Component {
     render() {
       const props = this.props;
-      return <ConnectedComponent {...props} store={Authmanager.store} />
+      return <ConnectedComponent { ...props } store={ props.store || Authmanager.store } />
     }
   }
 
