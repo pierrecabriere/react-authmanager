@@ -14,54 +14,54 @@
 - [Secure components](#5---secure-components)
 - [Advanced configuration](#6---advanced-configuration)
 
-# 1 - Installation
-```
-yarn add react-authmanager
-```
-
-# 2 - Minimal configuration
-
-To properly work, **react-authmanager** needs to know how to get the current user from the server and how to get the token from the login response.<br/>
-The simplest way to configure the manager is to import it and change its config object.<br/>
-You need to define the configuration before starting to use the toolkit, so the best place to configure the manager is the `index.js` or `App.js` file.
-
-**example with axios**
+## 1 - Getting started
+`npm install --save react-authmanager`, then you have to configure some points before starting to use the toolkit.<br/>
+To manage configuration, you need to import the Authmanager from the toolkit and change its default configuration before starting to use (so your higher component is the best place to configure):
 ```js
-import axios from 'axios'
 import Authmanager from 'react-authmanager';
 
-// credentials is an object that you will define later (see the next section below on how to authenticate users)
+// will change the way how the toolkit will login the user and get a token back, see below
+Authmanager.config.getToken = function() {}
+```
+
+**react-authmanager** needs to know:
+- how to login the user from the server and get a token back ([`config.getToken`](#gettokencredentials-async))
+- how to get the current logged user informations from the server ([`config.getUser`](#getuser-async))
+
+**you** will need:
+- to include the current token in your requests headers authorization ([`utils.getToken`])
+
+### Minimal configuration for the toolkit
+```js
+import Authmanager from 'react-authmanager';
+
+// how to login the user from the server and get a token back
 Authmanager.config.getToken = async credentials => {
-  const { data } = await axios.post('https://example.com/login', credentials);
-  return data.token;
+  ... // login user with an ajax call to the server and get a token back
+  return token;
 }
 
+// how to get the current logged user informations from the server
 Authmanager.config.getUser = async () => {
-  const { data } = await axios.get('https://example.com/user');
-  return data;
+  ... // get current logged user informations from the server with an ajax call
+  return user;
 }
 ```
 
-*For more configurations, please read the [advanced configuration](#6---advanced-configuration) section below.*<br/>
-
-In addition, you will need to inject the token in the Authorization headers of each request made.<br/>
-To get the stored token, you can call `Authmanager.utils.getToken()`<br/>
-
-**example with axios**
+### Authorize your requests to get the logged user from the server
 ```js
-import axios from 'axios'
-import Authmanager from 'react-authmanager';
-
-axios.defaults.transformRequest.push((data, headers) => {
-  const token = Authmanager.utils.getToken(); // returns null if no token is stored
-  if (token)
-    headers.common['Authorization'] = `Bearer ${token}`;
-
-  return data;
+// include the current token in your requests headers authorization
+fetch(..., {
+  headers: new Headers({
+    'Authorization': Authmanager.utils.getToken() // returns null if no token is stored
+  }),
+  ...
 });
 ```
 
-# 3 - Authenticate users
+*For more configurations, please read the [advanced configuration](#5---advanced-configuration) section below.*<br/>
+
+## 2 - Authenticate users
 **withAuth** HOC injects in your component helpers to manage authentication: **login**, **logout** and **auth**.<br/>
 **login** and **logout** are functions to log users. **auth** is an object that contains a state of operations.<br/>
 
@@ -108,16 +108,16 @@ class LogoutComponent extends React.Component {
 }
 ```
 
-# 4 - Access users
-**withUser** HOC will automatically inject an user object in your props component.<br/>
+## 3 - Access user informations
+**withUser** HOC will automatically inject an user object in your component props.<br/>
 This object contains informations about the current user :<br/>
 
-| prop       | default | description                                                                                        |
-|:-----------|:--------|:---------------------------------------------------------------------------------------------------|
-| user:      |         | `object` containing current user informations                                                      |
-| -- loading | false   | `bool` is user currently loaded from the server                                                    |
-| -- logged  | false   | `bool` is the current user logged in (setted by [isUserLogged](#isuserloggeduser-async))           |
-| -- ...     | null    | `any` informations about the user sent by the server (setted by [getUser](#getuser-async)) |
+| prop       | default | description                                                                                         |
+|:-----------|:--------|:----------------------------------------------------------------------------------------------------|
+| user:      |         | `object` containing current user informations                                                       |
+| -- loading | false   | `bool` is user currently loaded from the server                                                     |
+| -- logged  | false   | `bool` is the current user logged in (setted by [`config.isUserLogged`](#isuserloggeduser-async))   |
+| -- ...     | null    | `any` informations about the user sent by the server (setted by [`config.getUser`](#getuser-async)) |
 
 ```js
 import { withUser } from 'react-authmanager';
@@ -135,7 +135,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-# 5 - Secure components
+## 4 - Secure components
 **withGuard** HOC helps you protect your components in a flexible way. By example, you can render a login form instead of a component if no user is logged in.<br/>
 It needs a guard as parameter. A guard is just a function that returns a component, so you can easily create your own guards.<br/>
 A guard function has some parameters:<br/>
@@ -171,7 +171,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-# 6 - Advanced configuration
+## 5 - Advanced configuration
 
 To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object :
 ```js
@@ -182,21 +182,21 @@ Authmanager.config.getToken = function(credentials) {
 }
 ```
 
-## `getToken([credentials]) [async]`
-Get an authentication token when an user try to login. `getToken` is called when the auth login function is executed.
+### `getToken([credentials]) [async]`
+Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed.
 
-**Parameters**<br/>
+**Parameters**
 - [`credentials`] *(Object)* Arguments passed by the login function.
 
 **Return *(String)***<br/>
 Need to return a token that will be stored
 
-**default**<br/>
+**default**
 ```js
 getToken = null;
 ```
 
-**example**
+**example with axios**
 ```js
 Authmanager.config.getToken = async credentials => {
   const { data } = await axios.post('https://example.com/login', credentials);
@@ -204,18 +204,18 @@ Authmanager.config.getToken = async credentials => {
 }
 ```
 
-## `getUser() [async]`
+### `getUser() [async]`
 Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
 
 **Return *(Object)***<br/>
 Need to return a token that will be stored
 
-**default**<br/>
+**default**
 ```js
 getUser = null;
 ```
 
-**example**
+**example with axios**
 ```js
 Authmanager.config.getUser = async () => {
  const { data } = await axios.get('https://example.com/user');
@@ -223,22 +223,22 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
-## `isUserLogged([user]) [async]`
+### `isUserLogged([user]) [async]`
 Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
 
-**Parameters**<br/>
-- [`user`] *(Object)* Object returned by the `getUser`.
+**Parameters**
+- [`user`] *(Object)* Object returned by the `getUser` function.
 
 **Return *(Boolean)***<br/>
 Need to return a boolean that tell if the current user (returned by `getUser`) is logged.
 
-**default**<br/>
+**default**
 ```js
 isUserLogged = user => null !== user;
 ```
 *By default, `isUserLogged` returns true if `getUser` returns something different than null*
 
-**example**
+**example with axios**
 ```js
 Authmanager.config.getUser = async () => {
  const { data } = await axios.get('https://example.com/user');
@@ -246,4 +246,4 @@ Authmanager.config.getUser = async () => {
 }
 ```
 
-# 🚀
+🚀
