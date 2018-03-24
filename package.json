@@ -54,6 +54,8 @@
     "setupFiles": [
       "jest-localstorage-mock",
       "./test/setup"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }
