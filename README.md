@@ -7,12 +7,12 @@
 
 ---
 
-- [Installation](#1---installation)
-- [Minimal configuration](#2---minimal-configuration)
-- [Authenticate users](#3---authenticate-users)
-- [Access users](#4---access-users)
-- [Secure components](#5---secure-components)
-- [Advanced configuration](#6---advanced-configuration)
+- [Getting started](#1---getting-started)
+- [Authenticate users](#2---authenticate-users)
+- [Access user informations](#3---access-user-informations)
+- [Secure components](#4---secure-components)
+- [Advanced configuration](#5---advanced-configuration)
+- [Utilities](#6---utilities)
 
 ## 1 - Getting started
 `npm install --save react-authmanager`, then you have to configure some points before starting to use the toolkit.<br/>
@@ -21,15 +21,15 @@ To manage configuration, you need to import the Authmanager from the toolkit and
 import Authmanager from 'react-authmanager';
 
 // will change the way how the toolkit will login the user and get a token back, see below
-Authmanager.config.getToken = function() {}
+Authmanager.config.getToken = function(credentials) {}
 ```
 
-**react-authmanager** needs to know:
-- how to login the user from the server and get a token back ([`config.getToken`](#gettokencredentials-async))
-- how to get the current logged user informations from the server ([`config.getUser`](#getuser-async))
+**react-authmanager** needs:
+- to know how to login the user from the server and get a token back ([`config.getToken`](#gettokencredentials-async))
+- to know how to get the current logged user informations from the server ([`config.getUser`](#getuser-async))
 
 **you** will need:
-- to include the current token in your requests headers authorization ([`utils.getToken`])
+- to include the current token in your requests headers authorization ([`utils.getToken`](#gettoken))
 
 ### Minimal configuration for the toolkit
 ```js
@@ -172,24 +172,24 @@ class MyComponent extends React.Component {
 ```
 
 ## 5 - Advanced configuration
-
 To edit default configuration of **react-authmanager**, you have to import the `Authmanager` and override the config object :
 ```js
-import Authmanager from 'react-authmanager'
+import Authmanager from 'react-authmanager';
 
-Authmanager.config.getToken = function(credentials) {
-  // here you should return a token, see the configuration below
-}
+// will change the way how the toolkit will login the user and get a token back, see below
+Authmanager.config.getToken = function(credentials) {}
 ```
 
 ### `getToken([credentials]) [async]`
-Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed.
+Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed to store the token in *localStorage*.
 
 **Parameters**
 - [`credentials`] *(Object)* Arguments passed by the login function.
 
-**Return *(String)***<br/>
+**Return *(String)***
+```
 Need to return a token that will be stored
+```
 
 **default**
 ```js
@@ -207,8 +207,10 @@ Authmanager.config.getToken = async credentials => {
 ### `getUser() [async]`
 Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
 
-**Return *(Object)***<br/>
-Need to return a token that will be stored
+**Return *(Object)***
+```
+Need to return informations about the current logged user
+```
 
 **default**
 ```js
@@ -229,8 +231,10 @@ Define if the current user (returned by `getUser`) is logged. `isUserLogged` is 
 **Parameters**
 - [`user`] *(Object)* Object returned by the `getUser` function.
 
-**Return *(Boolean)***<br/>
+**Return *(Boolean)***
+```
 Need to return a boolean that tell if the current user (returned by `getUser`) is logged.
+```
 
 **default**
 ```js
@@ -245,5 +249,34 @@ Authmanager.config.getUser = async () => {
  return data;
 }
 ```
+
+## 6 - Utilities
+**react-authmanager** also provides some utilities to manage the toolkit from your app:
+```js
+import Authmanager from 'react-authmanager';
+
+// will return the current stored token, or null, see below
+const Authmanager.utils.getToken()
+```
+
+### `getToken()`
+Returns the current stored token (in *localStorage*). You should use `getToken` to authorize your requests to the server
+
+**Return *(String)***
+```
+Returns the token stored after the config.getToken call
+```
+
+**example with axios**
+```js
+axios.defaults.transformRequest.push((data, headers) => {
+  const token = Authmanager.utils.getToken();
+  if (token) headers.common['Authorization'] = token;
+
+  return data;
+});
+```
+
+---
 
 🚀
