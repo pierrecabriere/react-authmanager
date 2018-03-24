@@ -6,4 +6,5 @@ node_js:
 script:
   - npm run build
   - npm run test
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
   - codecov
