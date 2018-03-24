@@ -8,3 +8,11 @@ Authmanager.config.getToken = async (credentials) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   return credentials;
 }
+
+Authmanager.config.getUser = async () => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return {
+    fullname: 'John Doe',
+    email: 'john@example.com'
+  };
+}

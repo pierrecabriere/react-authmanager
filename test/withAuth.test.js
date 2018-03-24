@@ -1,5 +1,5 @@
 import React from 'react';
-import Authmanager from '../'
+import Authmanager from '../';
 import withAuth from '../withAuth';
 import { shallow } from 'enzyme';
 
@@ -8,31 +8,65 @@ class Component extends React.Component {
 }
 
 const ComponentWithAuth = withAuth(Component);
-const ComponentShallow = shallow(<ComponentWithAuth />).first().shallow();
-const props = ComponentShallow.props();
+
+let component;
+
+beforeEach(() => {
+  component = shallow(<ComponentWithAuth />).dive();
+})
 
 describe('withAuth HOC', () => {
 
   it('should inject props', done => {
-    expect(props.login).toBeDefined;
-    expect(props.logout).toBeDefined;
-    expect(props.auth).toBeDefined;
-    expect(props.auth.loading).toBe(false);
+    component.update();
+    expect(component.props().login).toBeDefined;
+    expect(component.props().logout).toBeDefined;
+    expect(component.props().auth).toBeDefined;
+    expect(component.props().auth.loading).toBeDefined;
+    expect(component.props().auth.loading).toBe(false);
     done();
   });
 
   it('injected login prop should store a token', async done => {
-    await props.login('test');
+    component.update();
+    await component.props().login('test');
     const token = Authmanager.utils.getToken();
     expect(token).toBe('test');
     done();
   });
 
   it('injected logout prop should clear the token', async done => {
-    await props.login('test');
-    await props.logout();
+    component.update();
+    await component.props().login('test');
+    await component.props().logout();
     const token = Authmanager.utils.getToken();
     expect(null === token || "null" === token).toBe(true);
+    done();
+  });
+
+  it('injected login prop should set loading true', async done => {
+    component.update();
+    const unsubscribe = Authmanager.store.subscribe(() => {
+      component.update();
+      expect(component.props().auth.loading).toBe(true);
+      unsubscribe();
+    });
+    await component.props().login();
+    component.update();
+    expect(component.props().auth.loading).toBe(false);
+    done();
+  });
+
+  it('injected logout prop should set loading true', async done => {
+    component.update();
+    const unsubscribe = Authmanager.store.subscribe(() => {
+      component.update();
+      expect(component.props().auth.loading).toBe(true);
+      unsubscribe();
+    });
+    await component.props().logout();
+    component.update();
+    expect(component.props().auth.loading).toBe(false);
     done();
   });
 
