@@ -278,6 +278,14 @@ axios.defaults.transformRequest.push((data, headers) => {
 });
 ```
 
+### `utils.getStore()`
+Returns the redux store of the toolkit. You should not have to use this function
+
+**Return *(Object)***
+```
+Returns the redux store object, containing the current state of the toolkit (user, auth, etc.)
+```
+
 ---
 
 🚀
