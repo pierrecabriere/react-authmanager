@@ -39,7 +39,7 @@ exports.default = _hocManager2.default.create(Component => {
   class WithAuth extends _react2.default.Component {
     render() {
       const props = this.props;
-      return _react2.default.createElement(ConnectedComponent, _extends({}, props, { store: props.store || _2.default.store }));
+      return _react2.default.createElement(ConnectedComponent, _extends({}, props, { store: props.store || _2.default.utils.getStore() }));
     }
   }
 

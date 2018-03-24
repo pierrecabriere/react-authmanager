@@ -18,14 +18,8 @@ class Authmanager {
   constructor() {
     this.config = _config2.default;
     this.utils = _utils2.default;
-    this._store = null;
   }
 
-  get store() {
-    if (!this._store) this._store = _utils2.default.createStore();
-
-    return this._store;
-  }
 }
 
 exports.default = new Authmanager();

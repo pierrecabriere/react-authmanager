@@ -102,6 +102,17 @@ if (!window.localStorage) {
   }());
 }
 
+let store = null;
+
+const createAuthStore = () => {
+  const store = (0, _redux.createStore)(_rootReducer2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+  // load user
+  store.dispatch((0, _userActions.fetch)());
+
+  return store;
+};
+
 class Utils {
   constructor() {
     this.getToken = () => {
@@ -118,19 +129,16 @@ class Utils {
       return true;
     };
 
-    this.createStore = () => {
-      const store = (0, _redux.createStore)(_rootReducer2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-      // load user
-      store.dispatch((0, _userActions.fetch)());
-
-      return store;
-    };
-
     this.createGuard = (name, guard) => {
       _config2.default.guards[name] = guard;
       return guard;
     };
+  }
+
+  getStore() {
+    if (!store) store = createAuthStore();
+
+    return store;
   }
 
 }

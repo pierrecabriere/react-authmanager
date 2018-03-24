@@ -85,6 +85,21 @@ if (!window.localStorage) {
   })());
 }
 
+let store = null;
+
+const createAuthStore = () => {
+  const store = createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    applyMiddleware(thunk)
+  );
+
+  // load user
+  store.dispatch(fetchUser());
+
+  return store;
+}
+
 class Utils {
   getToken = () => {
     return localStorage.getItem(JWT_NAME);
@@ -100,15 +115,9 @@ class Utils {
     return true;
   }
 
-  createStore = () => {
-    const store = createStore(
-      rootReducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-      applyMiddleware(thunk)
-    );
-
-    // load user
-    store.dispatch(fetchUser());
+  getStore() {
+    if (!store)
+      store = createAuthStore();
 
     return store;
   }
