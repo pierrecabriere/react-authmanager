@@ -12,9 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class UserService {
   constructor() {
-    this.fetch = async () => {
-      return await _config2.default.getUser();
-    };
+    this.fetch = async () => await _config2.default.getUser();
   }
 
 }

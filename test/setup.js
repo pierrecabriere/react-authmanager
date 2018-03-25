@@ -10,6 +10,9 @@ Authmanager.config.getToken = async (credentials) => {
 }
 
 Authmanager.config.getUser = async () => {
+  if ('invalid' === Authmanager.utils.getToken())
+    throw new Error("Ouups !");
+
   await new Promise(resolve => setTimeout(resolve, 500));
   return {
     fullname: 'John Doe',

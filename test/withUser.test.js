@@ -1,11 +1,12 @@
 import React from 'react';
 import Authmanager from '../'
-import withUser from '../withUser';
+import { withUser } from '../';
 import { shallow } from 'enzyme';
 
 class Component extends React.Component {
   render = () => null;
 }
+
 const ComponentWithUser = withUser(Component);
 
 let component;
@@ -36,5 +37,25 @@ describe('withUser HOC', () => {
       }
     });
   })
+
+});
+
+describe('withUser HOC with error', () => {
+
+  it('should stop loading anyway', async done => {
+    const unsubscribe = Authmanager.utils.getStore().subscribe(() => {
+      component.update();
+      if (false === component.props().user.loading) {
+        expect(component.props().user.loading).toBe(false);
+        expect(component.props().user.logged).toBe(false);
+        expect(component.props().user.fullname).not.toBeDefined();
+        unsubscribe();
+        done();
+      }
+    });
+    // make fetchUser throw error
+    Authmanager.utils.setToken('invalid');
+    Authmanager.utils.fetchUser();
+  });
 
 });

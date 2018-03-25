@@ -1,5 +1,5 @@
 import React from 'react';
-import withGuard from '../withGuard';
+import { withGuard } from '../';
 import { shallow } from 'enzyme';
 
 const getGuardWithUser = newUser => (user, next) => {
@@ -32,7 +32,12 @@ describe('withGuard HOC with not logged user', () => {
   let component;
 
   beforeEach(() => {
-    component = getComponentWithUser({ loading: false, logged: false, fullname: 'John Doe', email: 'john@example.com' });
+    component = getComponentWithUser({
+      loading: false,
+      logged: false,
+      fullname: 'John Doe',
+      email: 'john@example.com'
+    });
   })
 
   it('should render login', async done => {

@@ -1,6 +1,5 @@
 import React from 'react';
-import Authmanager from '../';
-import withAuth from '../withAuth';
+import Authmanager, { withAuth } from '../';
 import { shallow } from 'enzyme';
 
 class Component extends React.Component {
