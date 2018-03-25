@@ -21,6 +21,10 @@ describe('withUser HOC', () => {
     expect(component.props().user).toBeDefined;
     expect(component.props().user.loading).toBeDefined;
     expect(component.props().user.logged).toBeDefined;
+    done();
+  });
+
+  it('should inject user informations in props', async done => {
     const unsubscribe = Authmanager.utils.getStore().subscribe(() => {
       component.update();
       if (false === component.props().user.loading) {
@@ -32,6 +36,6 @@ describe('withUser HOC', () => {
       }
     });
     Authmanager.utils.fetchUser();
-  });
+  })
 
 });
