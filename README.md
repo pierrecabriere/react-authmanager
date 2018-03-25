@@ -18,7 +18,8 @@
 
 ## 1 - Getting started
 `npm install --save react-authmanager`, then you have to configure some points.<br/>
-To manage configuration, you need to import the Authmanager from the toolkit and change its default configuration before starting to use (so your higher component is the best place to configure):
+To manage configuration, you need to import the Authmanager from the toolkit and change its default configuration.
+You need to configure before starting to use the toolkit, so your higher component is the best place to configure (by example, it's the `App.js` file with a [create-react-app](https://github.com/facebook/create-react-app) instance !)
 ```js
 import Authmanager from 'react-authmanager';
 
