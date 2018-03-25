@@ -123,6 +123,7 @@ class Utils {
 
   fetchUser() {
     this.getStore().dispatch(fetchUser());
+    return this;
   }
 
   createGuard = (name, guard) => {

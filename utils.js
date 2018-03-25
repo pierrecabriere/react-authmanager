@@ -143,6 +143,7 @@ class Utils {
 
   fetchUser() {
     this.getStore().dispatch((0, _userActions.fetch)());
+    return this;
   }
 
 }

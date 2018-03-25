@@ -289,6 +289,14 @@ Returns the redux store of the toolkit. You should not have to use this function
 Returns the redux store object, containing the current state of the toolkit (user, auth, etc.)
 ```
 
+#### `utils.fetchUser()`
+Call the `getUser` function and update the redux store. You can use this function to refresh the current logged user from the server
+
+**Return *null***
+```
+Returns the redux store object, containing the current state of the toolkit (user, auth, etc.)
+```
+
 ---
 
 🚀
