@@ -7,12 +7,12 @@ const getGuardWithUser = newUser => (user, next) => {
     user = newUser;
 
   if (user.loading)
-    return 'loading';
+    return <div>loading</div>;
 
   if (user.logged)
     return next();
 
-  return 'login';
+  return <div>login</div>;
 }
 
 const getComponentWithUser = newUser => {

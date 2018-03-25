@@ -35,7 +35,6 @@ describe('withUser HOC', () => {
         done();
       }
     });
-    Authmanager.utils.fetchUser();
   })
 
 });

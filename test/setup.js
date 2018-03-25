@@ -4,9 +4,6 @@ import Authmanager from '../';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// initialize store for tests
-Authmanager.utils.getStore();
-
 Authmanager.config.getToken = async (credentials) => {
   await new Promise(resolve => setTimeout(resolve, 500));
   return credentials;
@@ -24,3 +21,6 @@ Authmanager.config.isUserLogged = async user => {
   await new Promise(resolve => setTimeout(resolve, 500));
   return null !== user;
 }
+
+// initialize store for tests
+Authmanager.utils.getStore();
