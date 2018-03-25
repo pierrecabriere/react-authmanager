@@ -292,9 +292,9 @@ Returns the redux store object, containing the current state of the toolkit (use
 #### `utils.fetchUser()`
 Call the `getUser` function and update the redux store. You can use this function to refresh the current logged user from the server
 
-**Return *null***
+**Return *utils***
 ```
-Returns the redux store object, containing the current state of the toolkit (user, auth, etc.)
+Returns the Authmanager.utils object
 ```
 
 ---
