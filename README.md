@@ -194,7 +194,7 @@ Authmanager.config.getToken = function(credentials) {}
 Get an authentication token when an user tries to login. `getToken` is called when the auth login function is executed to store the token in *localStorage*.
 
 **Parameters**
-- [`credentials`] *(Object)* Arguments passed by the login function.
+- [`credentials`] *(`Object`)* Arguments passed by the login function.
 
 **Return *(`String`)***
 ```
@@ -239,7 +239,7 @@ Authmanager.config.getUser = async () => {
 Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
 
 **Parameters**
-- [`user`] *(Object)* Object returned by the `getUser` function.
+- [`user`] *(`Object`)* Object returned by the `getUser` function.
 
 **Return *(`Boolean`)***
 ```
@@ -285,6 +285,23 @@ axios.defaults.transformRequest.push((data, headers) => {
 
   return data;
 });
+```
+
+#### `utils.setToken([token])`
+Manually set a token. You can call the `setToken` if you want to implements your own login function.
+
+**Parameters**
+- [`token`] *(`String`)* String token that will be returned by the `getToken` function.
+
+**Return *utils (`Object`)***
+```
+Need to return a boolean that tell if the current user (returned by `getUser`) is logged.
+```
+
+**example**
+```js
+Authmanager.utils.setToken('aValidToken');
+Authmanager.utils.fetchUser();
 ```
 
 #### `utils.getStore()`
