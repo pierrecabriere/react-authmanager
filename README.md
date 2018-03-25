@@ -77,7 +77,6 @@ fetch(..., {
 ```js
 import { withAuth } from 'react-authmanager';
 
-@withAuth
 class LoginComponent extends React.Component {
   handleSubmit() {
     const credentials = {
@@ -99,7 +98,10 @@ class LoginComponent extends React.Component {
   ...
 }
 
-@withAuth
+export default withAuth(LoginComponent);
+
+...
+
 class LogoutComponent extends React.Component {
   handleClick() {
     this.props.logout()
@@ -108,6 +110,8 @@ class LogoutComponent extends React.Component {
   
   ...
 }
+
+export default withAuth(LogoutComponent);
 ```
 
 ## 3 - Access user informations
@@ -124,7 +128,6 @@ This object contains informations about the current user:
 ```js
 import { withUser } from 'react-authmanager';
 
-@withUser
 class MyComponent extends React.Component {
   handleClick() {
     if (this.props.user.logged)
@@ -135,6 +138,8 @@ class MyComponent extends React.Component {
   
   ...
 }
+
+export default withUser(MyComponent);
 ```
 
 ## 4 - Secure components
@@ -161,7 +166,6 @@ const loggedGuard = function(user, next) {
   return (<MyLoginComponent />); // render a login component by default (if user is fetched from the server but not logged)
 }
 
-@withGuard(loggedGuard)
 class MyComponent extends React.Component {
   render() {
     return (
@@ -171,6 +175,8 @@ class MyComponent extends React.Component {
   
   ...
 }
+
+export default withGuard(MyComponent);
 ```
 
 ## 5 - Authmanager
@@ -190,7 +196,7 @@ Get an authentication token when an user tries to login. `getToken` is called wh
 **Parameters**
 - [`credentials`] *(Object)* Arguments passed by the login function.
 
-**Return *(String)***
+**Return *(`String`)***
 ```
 Need to return a token that will be stored
 ```
@@ -211,7 +217,7 @@ Authmanager.config.getToken = async credentials => {
 #### `config.getUser() [async]`
 Get the current authenticated user. `getUser` is called when the toolkit initialize its store and after an user login.
 
-**Return *(Object)***
+**Return *(`Object`)***
 ```
 Need to return informations about the current logged user
 ```
@@ -235,7 +241,7 @@ Define if the current user (returned by `getUser`) is logged. `isUserLogged` is 
 **Parameters**
 - [`user`] *(Object)* Object returned by the `getUser` function.
 
-**Return *(Boolean)***
+**Return *(`Boolean`)***
 ```
 Need to return a boolean that tell if the current user (returned by `getUser`) is logged.
 ```
@@ -266,7 +272,7 @@ const Authmanager.utils.getToken()
 #### `utils.getToken()`
 Returns the current stored token (in *localStorage*). You should use `getToken` to authorize your requests to the server
 
-**Return *(String)***
+**Return *(`String`)***
 ```
 Returns the token stored after the config.getToken call
 ```
@@ -284,7 +290,7 @@ axios.defaults.transformRequest.push((data, headers) => {
 #### `utils.getStore()`
 Returns the redux store of the toolkit. You should not have to use this function
 
-**Return *(Object)***
+**Return *(`Object`)***
 ```
 Returns the redux store object, containing the current state of the toolkit (user, auth, etc.)
 ```
@@ -292,7 +298,7 @@ Returns the redux store object, containing the current state of the toolkit (use
 #### `utils.fetchUser()`
 Call the `getUser` function and update the redux store. You can use this function to refresh the current logged user from the server
 
-**Return *utils***
+**Return *utils (`Object`)***
 ```
 Returns the Authmanager.utils object
 ```
