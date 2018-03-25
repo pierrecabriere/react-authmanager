@@ -24,7 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _hocManager2.default.create(Component => {
 
-  const ConnectedComponent = (0, _reactRedux.connect)(state => state)(Component);
+  const ConnectedComponent = (0, _reactRedux.connect)(state => ({ user: state.user }))(Component);
 
   class WithUser extends _react2.default.Component {
     render() {

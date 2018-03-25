@@ -34,7 +34,7 @@ exports.default = _hocManager2.default.create(Component => {
 
   const propsActions = { login: authActions.login, logout: authActions.logout };
 
-  const ConnectedComponent = (0, _reactRedux.connect)(state => state, dispatch => (0, _redux.bindActionCreators)(propsActions, dispatch))(Component);
+  const ConnectedComponent = (0, _reactRedux.connect)(state => ({ auth: state.auth }), dispatch => (0, _redux.bindActionCreators)(propsActions, dispatch))(Component);
 
   class WithAuth extends _react2.default.Component {
     render() {

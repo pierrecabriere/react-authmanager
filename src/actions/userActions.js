@@ -1,5 +1,6 @@
 import userService from '../services/userService';
 import * as types from '../types/userTypes';
+import config from '../config';
 
 export const fetchStart = () => ({
   type: types.FETCH_START
@@ -23,6 +24,7 @@ export const fetch = () => {
     dispatch(fetchStart());
     try {
       const data = await userService.fetch();
+      data.logged = await config.isUserLogged(data);
       dispatch(fetchSuccess(data));
     } catch (e) {
       dispatch(fetchError());

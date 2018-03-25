@@ -94,9 +94,6 @@ const createAuthStore = () => {
     applyMiddleware(thunk)
   );
 
-  // load user
-  store.dispatch(fetchUser());
-
   return store;
 }
 
@@ -107,24 +104,30 @@ class Utils {
 
   setToken = token => {
     localStorage.setItem(JWT_NAME, token);
-    return true;
+    return this;
   }
 
   deleteToken = () => {
     localStorage.removeItem(JWT_NAME);
-    return true;
+    return this;
   }
 
   getStore() {
-    if (!store)
+    if (!store) {
       store = createAuthStore();
+      this.fetchUser();
+    }
 
     return store;
   }
 
+  fetchUser() {
+    this.getStore().dispatch(fetchUser());
+  }
+
   createGuard = (name, guard) => {
     config.guards[name] = guard;
-    return guard;
+    return this;
   }
 }
 

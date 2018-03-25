@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.types = exports.logout = exports.login = exports.logoutEnd = exports.logoutStart = exports.loginEnd = exports.loginStart = undefined;
+exports.logout = exports.login = exports.logoutEnd = exports.logoutStart = exports.loginEnd = exports.loginStart = undefined;
 
 var _userActions = require('./userActions');
 
@@ -52,5 +52,3 @@ const logout = exports.logout = () => {
     dispatch((0, _userActions.fetchError)());
   };
 };
-
-exports.types = types;

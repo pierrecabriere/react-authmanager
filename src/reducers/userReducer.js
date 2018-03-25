@@ -1,5 +1,4 @@
 import * as types from '../types/userTypes';
-import config from '../config';
 
 const initialState = {
   loading: false,
@@ -23,8 +22,7 @@ const userReducer = (state = initialState, action) => {
     case types.FETCH_SUCCESS:
       return {
         ...state,
-        ...action.payload,
-        logged: config.isUserLogged(action.payload)
+        ...action.payload
       };
     default:
       return state;

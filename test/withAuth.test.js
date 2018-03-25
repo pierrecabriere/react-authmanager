@@ -46,7 +46,7 @@ describe('withAuth HOC', () => {
 
   it('injected login prop should set loading true', async done => {
     component.update();
-    const unsubscribe = Authmanager.store.subscribe(() => {
+    const unsubscribe = Authmanager.utils.getStore().subscribe(() => {
       component.update();
       expect(component.props().auth.loading).toBe(true);
       unsubscribe();
@@ -59,7 +59,7 @@ describe('withAuth HOC', () => {
 
   it('injected logout prop should set loading true', async done => {
     component.update();
-    const unsubscribe = Authmanager.store.subscribe(() => {
+    const unsubscribe = Authmanager.utils.getStore().subscribe(() => {
       component.update();
       expect(component.props().auth.loading).toBe(true);
       unsubscribe();

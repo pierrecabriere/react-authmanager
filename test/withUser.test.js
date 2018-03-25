@@ -1,6 +1,6 @@
 import React from 'react';
 import Authmanager from '../'
-import withUser from '../withAuth';
+import withUser from '../withUser';
 import { shallow } from 'enzyme';
 
 class Component extends React.Component {
@@ -11,7 +11,7 @@ const ComponentWithUser = withUser(Component);
 let component;
 
 beforeEach(() => {
-  component = shallow(<ComponentWithUser test="toto" />).dive();
+  component = shallow(<ComponentWithUser />).dive();
 })
 
 describe('withUser HOC', () => {
@@ -20,13 +20,10 @@ describe('withUser HOC', () => {
     component.update();
     expect(component.props().user).toBeDefined;
     expect(component.props().user.loading).toBeDefined;
-    expect(component.props().user.loading).toBe(false);
     expect(component.props().user.logged).toBeDefined;
-    expect(component.props().user.logged).toBe(false);
-    const unsubscribe = Authmanager.store.subscribe(() => {
+    const unsubscribe = Authmanager.utils.getStore().subscribe(() => {
       component.update();
       if (false === component.props().user.loading) {
-        component.update();
         expect(component.props().user.loading).toBe(false);
         expect(component.props().user.logged).toBe(true);
         expect(component.props().user.fullname).toBe('John Doe');
@@ -34,6 +31,7 @@ describe('withUser HOC', () => {
         done();
       }
     });
+    Authmanager.utils.fetchUser();
   });
 
 });

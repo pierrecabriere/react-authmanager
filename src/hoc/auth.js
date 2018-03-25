@@ -11,7 +11,7 @@ export default HOCManager.create(Component => {
   const propsActions = { login: authActions.login, logout: authActions.logout };
 
   const ConnectedComponent = connect(
-    state => state,
+    state => ({ auth: state.auth }),
     dispatch => bindActionCreators(propsActions, dispatch)
   )(Component);
 

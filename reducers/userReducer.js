@@ -10,12 +10,6 @@ var _userTypes = require('../types/userTypes');
 
 var types = _interopRequireWildcard(_userTypes);
 
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 const initialState = {
@@ -36,9 +30,7 @@ const userReducer = (state = initialState, action) => {
     case types.FETCH_ERROR:
       return initialState;
     case types.FETCH_SUCCESS:
-      return _extends({}, state, action.payload, {
-        logged: _config2.default.isUserLogged(action.payload)
-      });
+      return _extends({}, state, action.payload);
     default:
       return state;
   }

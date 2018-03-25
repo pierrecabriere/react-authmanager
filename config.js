@@ -8,7 +8,7 @@ class Config {
     this.getToken = null;
     this.getUser = null;
 
-    this.isUserLogged = user => null !== user;
+    this.isUserLogged = async user => null !== user;
 
     this.guards = {};
   }

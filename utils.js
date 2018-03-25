@@ -107,9 +107,6 @@ let store = null;
 const createAuthStore = () => {
   const store = (0, _redux.createStore)(_rootReducer2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
-  // load user
-  store.dispatch((0, _userActions.fetch)());
-
   return store;
 };
 
@@ -121,24 +118,31 @@ class Utils {
 
     this.setToken = token => {
       localStorage.setItem(JWT_NAME, token);
-      return true;
+      return this;
     };
 
     this.deleteToken = () => {
       localStorage.removeItem(JWT_NAME);
-      return true;
+      return this;
     };
 
     this.createGuard = (name, guard) => {
       _config2.default.guards[name] = guard;
-      return guard;
+      return this;
     };
   }
 
   getStore() {
-    if (!store) store = createAuthStore();
+    if (!store) {
+      store = createAuthStore();
+      this.fetchUser();
+    }
 
     return store;
+  }
+
+  fetchUser() {
+    this.getStore().dispatch((0, _userActions.fetch)());
   }
 
 }

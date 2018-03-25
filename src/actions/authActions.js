@@ -35,5 +35,3 @@ export const logout = () => {
     dispatch(fetchError());
   }
 }
-
-export { types }
