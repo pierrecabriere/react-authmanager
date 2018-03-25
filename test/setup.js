@@ -25,5 +25,7 @@ Authmanager.config.isUserLogged = async user => {
   return null !== user;
 }
 
+Authmanager.utils.setToken(null);
+
 // initialize store for tests
 Authmanager.utils.getStore();

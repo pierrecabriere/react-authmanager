@@ -50,6 +50,7 @@ describe('withUser HOC with error', () => {
         expect(component.props().user.logged).toBe(false);
         expect(component.props().user.fullname).not.toBeDefined();
         unsubscribe();
+        Authmanager.utils.deleteToken();
         done();
       }
     });

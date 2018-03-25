@@ -7,6 +7,7 @@ describe('tokenStorage', () => {
     Authmanager.utils.setToken('test');
     const token = Authmanager.utils.getToken();
     expect(token).toBe('test');
+    Authmanager.utils.deleteToken();
     done();
   });
 
@@ -15,6 +16,7 @@ describe('tokenStorage', () => {
     Authmanager.utils.deleteToken();
     const token = Authmanager.utils.getToken();
     expect(null === token || "null" === token).toBe(true);
+    Authmanager.utils.deleteToken();
     done();
   });
 
