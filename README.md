@@ -180,7 +180,7 @@ class MyComponent extends React.Component {
 export default withGuard(loggedGuard)(MyComponent);
 ```
 
-You can also configure you guards from outside the component file with the [`utils.createGuard`]() Authmanager function :
+You can also configure you guards from outside the component file with the [`utils.createGuard`](#utilscreateguardguard) Authmanager function :
 
 ```js
 Authmanager.utils.createGuard('loggedGuard', function(user, next) {
@@ -331,6 +331,30 @@ Need to return a boolean that tell if the current user (returned by `getUser`) i
 ```js
 Authmanager.utils.setToken('aValidToken');
 Authmanager.utils.fetchUser();
+```
+
+#### `utils.createGuard([guard])`
+Create a guard at the toolkit level, you will be able to reuse the guard just by giving its name
+
+**Parameters**
+- [`guard`] *(`Function`)* A function that returns a component or call the next function to render the default component.
+
+**Return *Component | next()***
+```
+Need to return a valid React component or call the next function given in parameters.
+```
+
+**example**
+```js
+Authmanager.utils.createGuard('loggedGuard', (user, next) => {
+  if (user.loading)
+    return <div>loading</div>;
+    
+  if (user.logged)
+    return next();
+    
+  return <div>login</div>;
+});
 ```
 
 #### `utils.getStore()`
