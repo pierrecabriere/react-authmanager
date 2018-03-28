@@ -177,7 +177,35 @@ class MyComponent extends React.Component {
   ...
 }
 
-export default withGuard(MyComponent);
+export default withGuard(loggedGuard)(MyComponent);
+```
+
+You can also configure you guards from outside the component file with the [`utils.createGuard`]() Authmanager function :
+
+```js
+Authmanager.utils.createGuard('loggedGuard', function(user, next) {
+  if (user.loading)
+    return (<MyLoadingComponent />); // render a loading component if user is currently fetched from the server
+    
+  if (user.logged)
+    return next(); // render the component if user is not loading and is logged
+    
+  return (<MyLoginComponent />); // render a login component by default (if user is fetched from the server but not logged)
+});
+
+...
+
+class MyComponent extends React.Component {
+  render() {
+    return (
+      <div>This message is visible only for logged users !</div>
+    )
+  }
+  
+  ...
+}
+
+export default withGuard('loggedGuard')(MyComponent);
 ```
 
 ## 5 - Authmanager
