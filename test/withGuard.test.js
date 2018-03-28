@@ -1,5 +1,5 @@
 import React from 'react';
-import { withGuard } from '../';
+import Authmanager, { withGuard } from '../';
 import { shallow } from 'enzyme';
 
 const getGuardWithUser = newUser => (user, next) => {
@@ -15,8 +15,8 @@ const getGuardWithUser = newUser => (user, next) => {
   return <div>login</div>;
 }
 
-const getComponentWithUser = newUser => {
-  const guard = getGuardWithUser(newUser);
+const getComponentWithUser = (newUser, guardName = null) => {
+  const guard = guardName || getGuardWithUser(newUser);
 
   class Component extends React.Component {
     render = () => 'component';
@@ -84,6 +84,35 @@ describe('withGuard HOC with logged user', () => {
 
   beforeEach(() => {
     component = getComponentWithUser({ loading: false, logged: true, fullname: 'John Doe', email: 'john@example.com' });
+  })
+
+  it('should render component', async done => {
+    component = component.dive();
+    component.update();
+    expect(component.text()).toBe('component');
+    done();
+  });
+
+});
+
+describe('withGuard HOC with external guard configuration', () => {
+
+  Authmanager.utils.createGuard('externalGuard', (user, next) => {
+    user = { loading: false, logged: true, fullname: 'John Doe', email: 'john@example.com' };
+
+    if (user.loading)
+      return <div>loading</div>;
+
+    if (user.logged)
+      return next();
+
+    return <div>login</div>;
+  });
+
+  let component;
+
+  beforeEach(() => {
+    component = getComponentWithUser(null, 'externalGuard');
   })
 
   it('should render component', async done => {
