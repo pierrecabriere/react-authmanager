@@ -19,7 +19,7 @@ const getComponentWithUser = (newUser, guardName = null) => {
   const guard = guardName || getGuardWithUser(newUser);
 
   class Component extends React.Component {
-    render = () => 'component';
+    render = () => this.props.injectedProp || 'component';
   }
 
   const ComponentWithGuard = withGuard(guard)(Component);
@@ -118,6 +118,37 @@ describe('withGuard HOC with external guard configuration', () => {
   it('should render component', async done => {
     component = component.dive();
     component.update();
+    console.log(component.text());
+    expect(component.text()).toBe('component');
+    done();
+  });
+
+});
+
+describe('withGuard HOC with external guard configuration that injects a prop', () => {
+
+  Authmanager.utils.createGuard('externalGuard', (user, next) => {
+    user = { loading: false, logged: true, fullname: 'John Doe', email: 'john@example.com' };
+
+    if (user.loading)
+      return <div>loading</div>;
+
+    if (user.logged)
+      return next({ injectedProp: 'test' });
+
+    return <div>login</div>;
+  });
+
+  let component;
+
+  beforeEach(() => {
+    component = getComponentWithUser(null, 'externalGuard');
+  })
+
+  it('should render component', async done => {
+    component = component.dive();
+    component.update();
+    console.log(component.text());
     expect(component.text()).toBe('component');
     done();
   });

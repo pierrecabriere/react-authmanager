@@ -25,7 +25,7 @@ exports.default = _hocManager2.default.create((Component, parameters) => {
   class WithGuard extends _react2.default.Component {
     render() {
       const { user } = this.props;
-      const next = value => _react2.default.createElement(Component, _extends({}, this.props, { guard: undefined !== value ? value : null }));
+      const next = (nextProps = {}) => _react2.default.createElement(Component, _extends({}, this.props, nextProps));
 
       let guard = parameters[0];
       if ('string' === typeof guard) guard = _config2.default.guards[guard];
