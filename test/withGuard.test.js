@@ -127,14 +127,14 @@ describe('withGuard HOC with external guard configuration', () => {
 
 describe('withGuard HOC with external guard configuration that injects a prop', () => {
 
-  Authmanager.utils.createGuard('externalGuard', (user, next) => {
+  Authmanager.utils.createGuard('externalGuardthatInjects', (user, next) => {
     user = { loading: false, logged: true, fullname: 'John Doe', email: 'john@example.com' };
 
     if (user.loading)
       return <div>loading</div>;
 
     if (user.logged)
-      return next({ injectedProp: 'test' });
+      return next({ injectedProp: 'injected' });
 
     return <div>login</div>;
   });
@@ -142,14 +142,13 @@ describe('withGuard HOC with external guard configuration that injects a prop', 
   let component;
 
   beforeEach(() => {
-    component = getComponentWithUser(null, 'externalGuard');
+    component = getComponentWithUser(null, 'externalGuardthatInjects');
   })
 
   it('should render component', async done => {
     component = component.dive();
     component.update();
-    console.log(component.text());
-    expect(component.text()).toBe('component');
+    expect(component.text()).toBe('injected');
     done();
   });
 
