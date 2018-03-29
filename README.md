@@ -180,6 +180,26 @@ class MyComponent extends React.Component {
 export default withGuard(loggedGuard)(MyComponent);
 ```
 
+You can inject data in your rendered component props through the next function
+```js
+const guardThatInjects = function(user, next) {
+    return next({ myNewProp: true });
+}
+
+class MyComponent extends React.Component {
+  render() {
+    console.log(this.props.myNewProp); // true
+    return (
+      <div>This message is visible only for logged users !</div>
+    )
+  }
+
+  ...
+}
+
+export default withGuard(loggedGuard)(MyComponent);
+```
+
 You can also configure you guards from outside the component file with the [`utils.createGuard`](#utilscreateguardguard) Authmanager function :
 
 ```js
@@ -356,6 +376,8 @@ Authmanager.utils.createGuard('loggedGuard', (user, next) => {
   return <div>login</div>;
 });
 ```
+
+
 
 #### `utils.getStore()`
 Returns the redux store of the toolkit. You should not have to use this function
