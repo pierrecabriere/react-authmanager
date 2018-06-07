@@ -32,7 +32,7 @@ const createAuthStore = () => {
   return store;
 };
 
-class Utils {
+class _Utils {
   constructor() {
     this.getToken = () => {
       return localStorage.getItem(JWT_NAME);
@@ -70,4 +70,4 @@ class Utils {
 
 }
 
-exports.default = new Utils();
+exports.default = new _Utils();
