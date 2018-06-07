@@ -16,7 +16,7 @@ var _authReducer2 = _interopRequireDefault(_authReducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var rootReducer = (0, _redux.combineReducers)({
+const rootReducer = (0, _redux.combineReducers)({
   user: _userReducer2.default,
   auth: _authReducer2.default
 });
