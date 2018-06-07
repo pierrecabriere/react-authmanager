@@ -1,8 +1,8 @@
-class Config {
+class _Config {
   getToken = null;
   getUser = null;
   isUserLogged = async user => null !== user;
   guards = {};
 }
 
-export default new Config()
+export default new _Config()

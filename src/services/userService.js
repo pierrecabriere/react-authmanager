@@ -1,7 +1,7 @@
 import config from '../config';
 
-class UserService {
+class _UserService {
   fetch = async () => await config.getUser();
 }
 
-export default new UserService();
+export default new _UserService();

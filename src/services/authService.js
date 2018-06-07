@@ -1,7 +1,7 @@
 import config from '../config';
 import utils from '../utils';
 
-class AuthService {
+class _AuthService {
   login = async credentials => {
     const token = await config.getToken(credentials);
     utils.setToken(token);
@@ -14,4 +14,4 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+export default new _AuthService();

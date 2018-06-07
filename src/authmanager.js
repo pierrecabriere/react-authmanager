@@ -1,9 +1,9 @@
 import config from './config';
 import utils from './utils';
 
-class Authmanager {
+class _Authmanager {
   config = config;
   utils = utils;
 }
 
-export default new Authmanager();
+export default new _Authmanager();

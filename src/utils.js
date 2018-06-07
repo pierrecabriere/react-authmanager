@@ -19,7 +19,7 @@ const createAuthStore = () => {
   return store;
 }
 
-class Utils {
+class _Utils {
   getToken = () => {
     return localStorage.getItem(JWT_NAME);
   }
@@ -54,4 +54,4 @@ class Utils {
   }
 }
 
-export default new Utils();
+export default new _Utils();
