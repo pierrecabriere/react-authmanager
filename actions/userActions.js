@@ -21,6 +21,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
 const fetchStart = exports.fetchStart = () => ({
   type: types.FETCH_START
 });
@@ -39,15 +41,21 @@ const fetchSuccess = exports.fetchSuccess = data => ({
 });
 
 const fetch = exports.fetch = () => {
-  return async dispatch => {
-    dispatch(fetchStart());
-    try {
-      const data = await _userService2.default.fetch();
-      data.logged = await _config2.default.isUserLogged(data);
-      dispatch(fetchSuccess(data));
-    } catch (e) {
-      dispatch(fetchError());
-    }
-    dispatch(fetchEnd());
-  };
+  return (() => {
+    var _ref = _asyncToGenerator(function* (dispatch) {
+      dispatch(fetchStart());
+      try {
+        const data = yield _userService2.default.fetch();
+        data.logged = yield _config2.default.isUserLogged(data);
+        dispatch(fetchSuccess(data));
+      } catch (e) {
+        dispatch(fetchError());
+      }
+      dispatch(fetchEnd());
+    });
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  })();
 };
