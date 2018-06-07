@@ -12,12 +12,15 @@ var types = _interopRequireWildcard(_userTypes);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-const initialState = {
+var initialState = {
   loading: false,
   logged: false
 };
 
-const userReducer = (state = initialState, action) => {
+var userReducer = function userReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
   switch (action.type) {
     case types.FETCH_START:
       return _extends({}, state, {

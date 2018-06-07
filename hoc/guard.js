@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -20,19 +22,43 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _hocManager2.default.create((Component, parameters) => {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  class WithGuard extends _react2.default.Component {
-    render() {
-      const { user } = this.props;
-      const next = (nextProps = {}) => _react2.default.createElement(Component, _extends({}, this.props, nextProps));
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-      let guard = parameters[0];
-      if ('string' === typeof guard) guard = _config2.default.guards[guard];
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-      return guard(user, next, this.props) || null;
+exports.default = _hocManager2.default.create(function (Component, parameters) {
+  var WithGuard = function (_React$Component) {
+    _inherits(WithGuard, _React$Component);
+
+    function WithGuard() {
+      _classCallCheck(this, WithGuard);
+
+      return _possibleConstructorReturn(this, (WithGuard.__proto__ || Object.getPrototypeOf(WithGuard)).apply(this, arguments));
     }
-  }
+
+    _createClass(WithGuard, [{
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+
+        var user = this.props.user;
+
+        var next = function next() {
+          var nextProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+          return _react2.default.createElement(Component, _extends({}, _this2.props, nextProps));
+        };
+
+        var guard = parameters[0];
+        if ('string' === typeof guard) guard = _config2.default.guards[guard];
+
+        return guard(user, next, this.props) || null;
+      }
+    }]);
+
+    return WithGuard;
+  }(_react2.default.Component);
 
   return WithGuard;
 }, {

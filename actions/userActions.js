@@ -23,39 +23,75 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-const fetchStart = exports.fetchStart = () => ({
-  type: types.FETCH_START
-});
+var fetchStart = exports.fetchStart = function fetchStart() {
+  return {
+    type: types.FETCH_START
+  };
+};
 
-const fetchEnd = exports.fetchEnd = () => ({
-  type: types.FETCH_END
-});
+var fetchEnd = exports.fetchEnd = function fetchEnd() {
+  return {
+    type: types.FETCH_END
+  };
+};
 
-const fetchError = exports.fetchError = () => ({
-  type: types.FETCH_ERROR
-});
+var fetchError = exports.fetchError = function fetchError() {
+  return {
+    type: types.FETCH_ERROR
+  };
+};
 
-const fetchSuccess = exports.fetchSuccess = data => ({
-  type: types.FETCH_SUCCESS,
-  payload: data
-});
+var fetchSuccess = exports.fetchSuccess = function fetchSuccess(data) {
+  return {
+    type: types.FETCH_SUCCESS,
+    payload: data
+  };
+};
 
-const fetch = exports.fetch = () => {
-  return (() => {
-    var _ref = _asyncToGenerator(function* (dispatch) {
-      dispatch(fetchStart());
-      try {
-        const data = yield _userService2.default.fetch();
-        data.logged = yield _config2.default.isUserLogged(data);
-        dispatch(fetchSuccess(data));
-      } catch (e) {
-        dispatch(fetchError());
-      }
-      dispatch(fetchEnd());
-    });
+var fetch = exports.fetch = function fetch() {
+  return function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
+      var data;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              dispatch(fetchStart());
+              _context.prev = 1;
+              _context.next = 4;
+              return _userService2.default.fetch();
+
+            case 4:
+              data = _context.sent;
+              _context.next = 7;
+              return _config2.default.isUserLogged(data);
+
+            case 7:
+              data.logged = _context.sent;
+
+              dispatch(fetchSuccess(data));
+              _context.next = 14;
+              break;
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context['catch'](1);
+
+              dispatch(fetchError());
+
+            case 14:
+              dispatch(fetchEnd());
+
+            case 15:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined, [[1, 11]]);
+    }));
 
     return function (_x) {
       return _ref.apply(this, arguments);
     };
-  })();
+  }();
 };

@@ -9,7 +9,7 @@ var _withAuth = require('./withAuth');
 
 Object.defineProperty(exports, 'withAuth', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _interopRequireDefault(_withAuth).default;
   }
 });
@@ -18,7 +18,7 @@ var _withGuard = require('./withGuard');
 
 Object.defineProperty(exports, 'withGuard', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _interopRequireDefault(_withGuard).default;
   }
 });
@@ -27,7 +27,7 @@ var _withUser = require('./withUser');
 
 Object.defineProperty(exports, 'withUser', {
   enumerable: true,
-  get: function () {
+  get: function get() {
     return _interopRequireDefault(_withUser).default;
   }
 });
