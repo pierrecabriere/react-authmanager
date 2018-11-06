@@ -2,6 +2,8 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import config from './config';
+import userReducer from './reducers/userReducer';
+import authReducer from './reducers/authReducer';
 import rootReducer from './reducers/rootReducer';
 import { fetch as fetchUser } from './actions/userActions';
 
@@ -43,6 +45,13 @@ class _Utils {
     }
 
     return store;
+  }
+
+  getReducers() {
+    return {
+      user: userReducer,
+      auth: authReducer
+    };
   }
 
   getReducer() {
