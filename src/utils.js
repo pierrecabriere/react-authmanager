@@ -10,13 +10,11 @@ const JWT_NAME = 'AUTHMANAGER-JWT-AUTH';
 let store = null;
 
 const createAuthStore = () => {
-  const store = createStore(
+  return createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk)
   );
-
-  return store;
 }
 
 class _Utils {
@@ -34,13 +32,21 @@ class _Utils {
     return this;
   }
 
+  setStore = newStore => {
+    store = newStore;
+  }
+
   getStore() {
     if (!store) {
-      store = createAuthStore();
+      this.setStore(createAuthStore());
       this.fetchUser();
     }
 
     return store;
+  }
+
+  getReducer() {
+    return rootReducer;
   }
 
   fetchUser() {
