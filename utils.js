@@ -14,6 +14,14 @@ var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
 
+var _userReducer = require('./reducers/userReducer');
+
+var _userReducer2 = _interopRequireDefault(_userReducer);
+
+var _authReducer = require('./reducers/authReducer');
+
+var _authReducer2 = _interopRequireDefault(_authReducer);
+
 var _rootReducer = require('./reducers/rootReducer');
 
 var _rootReducer2 = _interopRequireDefault(_rootReducer);
@@ -63,6 +71,13 @@ class _Utils {
     }
 
     return store;
+  }
+
+  getReducers() {
+    return {
+      user: _userReducer2.default,
+      auth: _authReducer2.default
+    };
   }
 
   getReducer() {
