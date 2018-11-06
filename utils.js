@@ -46,6 +46,10 @@ class _Utils {
       return this;
     };
 
+    this.setStore = newStore => {
+      store = newStore;
+    };
+
     this.createGuard = (name, guard) => {
       _config2.default.guards[name] = guard;
       return this;
@@ -54,7 +58,7 @@ class _Utils {
 
   getStore() {
     if (!store) {
-      store = createAuthStore();
+      this.setStore(createAuthStore());
       this.fetchUser();
     }
 
