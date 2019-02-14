@@ -15,8 +15,13 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class _Authmanager {
-  config = _config2.default;
-  utils = _utils2.default;
+  get config() {
+    return _config2.default;
+  }
+
+  get utils() {
+    return _utils2.default;
+  }
 }
 
 exports.default = new _Authmanager();
