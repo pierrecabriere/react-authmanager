@@ -118,7 +118,6 @@ describe('withGuard HOC with external guard configuration', () => {
   it('should render component', async done => {
     component = component.dive();
     component.update();
-    console.log(component.text());
     expect(component.text()).toBe('component');
     done();
   });
