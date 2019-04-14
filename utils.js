@@ -30,8 +30,6 @@ var _userActions = require('./actions/userActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const JWT_NAME = 'AUTHMANAGER-JWT-AUTH';
-
 let store = null;
 
 const createAuthStore = () => {
@@ -39,29 +37,11 @@ const createAuthStore = () => {
 };
 
 class _Utils {
-  constructor() {
-    this.getToken = () => {
-      return localStorage.getItem(JWT_NAME);
-    };
 
-    this.setToken = token => {
-      localStorage.setItem(JWT_NAME, token);
-      return this;
-    };
+  constructor(name) {
+    _initialiseProps.call(this);
 
-    this.deleteToken = () => {
-      localStorage.removeItem(JWT_NAME);
-      return this;
-    };
-
-    this.setStore = newStore => {
-      store = newStore;
-    };
-
-    this.createGuard = (name, guard) => {
-      _config2.default.guards[name] = guard;
-      return this;
-    };
+    if (name) this.jwtName = `${this.jwtName}_${name}`;
   }
 
   getStore() {
@@ -91,4 +71,31 @@ class _Utils {
 
 }
 
-exports.default = new _Utils();
+var _initialiseProps = function () {
+  this.jwtName = 'AUTHMANAGER-JWT-AUTH';
+
+  this.getToken = () => {
+    return localStorage.getItem(this.jwtName);
+  };
+
+  this.setToken = token => {
+    localStorage.setItem(this.jwtName, token);
+    return this;
+  };
+
+  this.deleteToken = () => {
+    localStorage.removeItem(this.jwtName);
+    return this;
+  };
+
+  this.setStore = newStore => {
+    store = newStore;
+  };
+
+  this.createGuard = (name, guard) => {
+    _config2.default.guards[name] = guard;
+    return this;
+  };
+};
+
+exports.default = _Utils();
