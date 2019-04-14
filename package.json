@@ -1,6 +1,6 @@
 {
   "name": "react-authmanager",
-  "version": "1.4.4",
+  "version": "1.5.0",
   "description": "Integrate an authentication system based on JWT in your react app, in a simple way!",
   "main": "index.js",
   "scripts": {
