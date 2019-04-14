@@ -7,8 +7,6 @@ import authReducer from './reducers/authReducer';
 import rootReducer from './reducers/rootReducer';
 import { fetch as fetchUser } from './actions/userActions';
 
-const JWT_NAME = 'AUTHMANAGER-JWT-AUTH';
-
 let store = null;
 
 const createAuthStore = () => {
@@ -20,17 +18,24 @@ const createAuthStore = () => {
 }
 
 class _Utils {
+  jwtName = 'AUTHMANAGER-JWT-AUTH';
+
+  constructor(name) {
+    if (name)
+      this.jwtName = `${this.jwtName}_${name}`;
+  }
+
   getToken = () => {
-    return localStorage.getItem(JWT_NAME);
+    return localStorage.getItem(this.jwtName);
   }
 
   setToken = token => {
-    localStorage.setItem(JWT_NAME, token);
+    localStorage.setItem(this.jwtName, token);
     return this;
   }
 
   deleteToken = () => {
-    localStorage.removeItem(JWT_NAME);
+    localStorage.removeItem(this.jwtName);
     return this;
   }
 
@@ -69,4 +74,4 @@ class _Utils {
   }
 }
 
-export default new _Utils();
+export default _Utils();
