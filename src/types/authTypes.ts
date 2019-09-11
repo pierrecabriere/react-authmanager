@@ -1,0 +1,4 @@
+export const LOGIN_START = 'AUTH_LOGIN_START';
+export const LOGIN_END = 'AUTH_LOGIN_END';
+export const LOGOUT_START = 'AUTH_LOGOUT_START';
+export const LOGOUT_END = 'AUTH_LOGOUT_END';

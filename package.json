@@ -1,0 +1,32 @@
+{
+  "name": "react-authmanager",
+  "version": "2.0.0",
+  "description": "...",
+  "main": "dist/index.js",
+  "author": "hello@pierrecabriere.fr",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pierrecabriere/react-authmanager.git"
+  },
+  "homepage": "https://github.com/pierrecabriere/react-authmanager#readme",
+  "keywords": [
+    "authentication",
+    "JWT",
+    "react",
+    "redux",
+    "user",
+    "guard"
+  ],
+  "dependencies": {
+    "hoc-manager": "^1.1.0",
+    "react": "^16.9.0",
+    "redux": "^4.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.3"
+  }
+}
