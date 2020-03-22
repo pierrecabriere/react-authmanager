@@ -22,7 +22,7 @@ You need to configure the toolkit before starting to use, so your highest compon
 import Authmanager from 'react-authmanager';
 
 // will change the way how the toolkit will login the user and get a token back, see below
-Authmanager.config.fetchToken = function(credentials) {}
+Authmanager.fetchToken = function(credentials) {}
 ```
 
 You can also create a new toolkit instance.
@@ -33,8 +33,8 @@ const customManager = Authmanager.create("customName", { ...config });
 ```
 
 **react-authmanager** needs:
-- to know how to login the user from the server and get a token back ([`config.fetchToken`](#configfetchtokencredentials-async))
-- to know how to get the current logged user informations from the server ([`config.fetchUser`](#configfetchuser-async))
+- to know how to login the user from the server and get a token back ([`fetchToken`](#configfetchtokencredentials-async))
+- to know how to get the current logged user informations from the server ([`fetchUser`](#configfetchuser-async))
 
 **you** will need:
 - to include the current token in your requests headers authorization ([`getToken`](#gettoken))
@@ -44,13 +44,13 @@ const customManager = Authmanager.create("customName", { ...config });
 import Authmanager from 'react-authmanager';
 
 // how to login the user from the server and get a token back
-Authmanager.config.fetchToken = async credentials => {
+Authmanager.fetchToken = async credentials => {
   ... // login user with an ajax call to the server and return the given token
   return token;
 }
 
 // how to get the current logged user informations from the server
-Authmanager.config.fetchUser = async () => {
+Authmanager.fetchUser = async () => {
   ... // get current logged user informations from the server with an ajax call and return any data you will need
   return user;
 }
@@ -130,8 +130,8 @@ This object contains informations about the current user:
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------|
 | user:      |         | `object` containing current user informations                                                           |
 | -- loading | false   | `bool` is user currently loaded from the server                                                         |
-| -- logged  | false   | `bool` is the current user logged in (setted by [`config.isUserLogged`](#configisuserloggeduser-async)) |
-| -- ...     | null    | `any` informations about the user sent by the server (setted by [`config.getUser`](#configgetuser-async))    |
+| -- logged  | false   | `bool` is the current user logged in (setted by [`isUserLogged`](#configisuserloggeduser-async)) |
+| -- ...     | null    | `any` informations about the user sent by the server (setted by [`getUser`](#configgetuser-async))    |
 
 ```js
 import Authmanager from 'react-authmanager';
@@ -243,7 +243,7 @@ To edit the configuration of **react-authmanager**your toolkit, you have to over
 import Authmanager from 'react-authmanager';
 
 // will change the way how the toolkit will login the user and get a token back, see below
-Authmanager.config.fetchToken = function(credentials) {}
+Authmanager.fetchToken = function(credentials) {}
 ```
 
 ```typescript
@@ -254,7 +254,7 @@ interface IReactAuthConfig {
 }
 ```
 
-#### `config.fetchToken([credentials]) [async]`
+#### `fetchToken([credentials]) [async]`
 Get an authentication token when an user tries to login. `fetchToken` is called when the auth login function is executed to store the token in *localStorage*.
 
 **Parameters**
@@ -272,13 +272,13 @@ fetchToken = null;
 
 **example with axios**
 ```js
-Authmanager.config.fetchToken = async credentials => {
+Authmanager.fetchToken = async credentials => {
   const { data } = await axios.post('https://example.com/login', credentials);
   return data.token;
 }
 ```
 
-#### `config.fetchUser() [async]`
+#### `fetchUser() [async]`
 Get the current authenticated user. `fetchUser` is called when the toolkit initialize its store and after an user login.
 
 **Return *(`Object`)***
@@ -293,13 +293,13 @@ fetchUser = null;
 
 **example with axios**
 ```js
-Authmanager.config.fetchUser = async () => {
+Authmanager.fetchUser = async () => {
  const { data } = await axios.get('https://example.com/current-user');
  return data;
 }
 ```
 
-#### `config.isUserLogged([user]) [async]`
+#### `isUserLogged([user]) [async]`
 Define if the current user (returned by `getUser`) is logged. `isUserLogged` is called after each user state change. The result is set in `user.logged`.
 
 **Parameters**
@@ -330,7 +330,7 @@ Returns the current stored token (in *localStorage*). You should use `getToken` 
 
 **Return *(`String`)***
 ```
-Returns the token stored after the config.fetchToken call
+Returns the token stored after the `fetchToken` call
 ```
 
 **example with axios**
@@ -356,11 +356,11 @@ Need to return a boolean that tell if the current user (returned by `getUser`) i
 
 **example**
 ```js
-Authmanager.utils.setToken('aValidToken');
+Authmanager.setToken('aValidToken');
 Authmanager.getUser();
 ```
 
-#### `utils.addGuard([guard])`
+#### `addGuard([guard])`
 Create a guard at the toolkit level, you will be able to reuse the guard just by giving its name
 
 **Parameters**
@@ -373,7 +373,7 @@ Need to return a valid React component or call the next function given in parame
 
 **example**
 ```js
-Authmanager.utils.addGuard('loggedGuard', (user, next) => {
+Authmanager.addGuard('loggedGuard', (user, next) => {
   if (user.loading)
     return <div>loading</div>;
     
