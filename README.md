@@ -44,13 +44,13 @@ const customManager = Authmanager.create("customName", { ...config });
 import Authmanager from 'react-authmanager';
 
 // how to login the user from the server and get a token back
-Authmanager.fetchToken = async credentials => {
+Authmanager.config.fetchToken = async credentials => {
   ... // login user with an ajax call to the server and return the given token
   return token;
 }
 
 // how to get the current logged user informations from the server
-Authmanager.fetchUser = async () => {
+Authmanager.config.fetchUser = async () => {
   ... // get current logged user informations from the server with an ajax call and return any data you will need
   return user;
 }
