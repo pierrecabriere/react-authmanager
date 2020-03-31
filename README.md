@@ -22,7 +22,7 @@ You need to configure the toolkit before starting to use, so your highest compon
 import Authmanager from 'react-authmanager';
 
 // will change the way how the toolkit will login the user and get a token back, see below
-Authmanager.fetchToken = function(credentials) {}
+Authmanager.config.fetchToken = function(credentials) {}
 ```
 
 You can also create a new toolkit instance.
