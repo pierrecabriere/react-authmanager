@@ -272,7 +272,7 @@ fetchToken = null;
 
 **example with axios**
 ```js
-Authmanager.fetchToken = async credentials => {
+Authmanager.config.fetchToken = async credentials => {
   const { data } = await axios.post('https://example.com/login', credentials);
   return data.token;
 }
@@ -293,7 +293,7 @@ fetchUser = null;
 
 **example with axios**
 ```js
-Authmanager.fetchUser = async () => {
+Authmanager.config.fetchUser = async () => {
  const { data } = await axios.get('https://example.com/current-user');
  return data;
 }
