@@ -103,10 +103,12 @@ class ReactAuth {
       data = await this.config.fetchUser();
       data.logged = await this.config.isUserLogged(data);
       this.store.dispatch(userActions.fetchSuccess(data));
+      this.store.dispatch(userActions.fetchEnd());
     } catch (e) {
       this.store.dispatch(userActions.fetchError());
+      this.store.dispatch(userActions.fetchEnd());
+      throw e;
     }
-    this.store.dispatch(userActions.fetchEnd());
     return data;
   }
 }
