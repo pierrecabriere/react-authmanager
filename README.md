@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/react-authmanager.svg)](https://www.npmjs.com/package/react-authmanager)
 
-**react-authmanager is a highly-configurable toolkit for react. It manages users authentication with JWT in your app and provides guards HOCs to secure components in a flexible and simple way.**
+**react-authmanager is a highly-configurable manager for react. It manages users authentication with JWT in your app and provides guards HOCs to secure components in a flexible and simple way.**
 
 ---
 
@@ -17,15 +17,15 @@
 ## 1 - Getting started
 `npm install --save react-authmanager`, then you have to configure the package.<br/>
 To manage configuration, you need to import the default Authmanager.<br/>
-You need to configure the toolkit before starting to use, so your highest component file is the best place (by example, it's the `App.js` file with a [create-react-app](https://github.com/facebook/create-react-app) instance !)
+You need to configure the manager before starting to use, so your highest component file is the best place (by example, it's the `App.js` file with a [create-react-app](https://github.com/facebook/create-react-app) instance !)
 ```js
 import Authmanager from 'react-authmanager';
 
-// will change the way how the toolkit will login the user and get a token back, see below
+// will change the way how the manager will login the user and get a token back, see below
 Authmanager.fetchToken = function(credentials) {}
 ```
 
-You can also create a new toolkit instance.
+You can also create a new manager instance.
 ```js
 import Authmanager from 'react-authmanager';
 
@@ -39,7 +39,7 @@ const customManager = Authmanager.create("customName", { ...config });
 **you** will need:
 - to include the current token in your requests headers authorization ([`getToken`](#gettoken))
 
-### Minimal configuration for the toolkit
+### Minimal configuration for the manager
 ```js
 import Authmanager from 'react-authmanager';
 
@@ -120,7 +120,7 @@ class LogoutComponent extends React.Component {
 export default Authmanager.withAuth(LogoutComponent); // or customManager.withAuth(LogoutComponent);
 ```
 
-You can also call the login and logout methods anywhere on the toolkit with `Authmanager.login()` and `Authmanager.logout()`
+You can also call the login and logout methods anywhere on the manager with `Authmanager.login()` and `Authmanager.logout()`
 
 ## 3 - Access user informations
 **withUser** HOC will automatically injects an user object in your component props.<br/>
@@ -238,11 +238,11 @@ export default Authmanager.withGuard('loggedGuard')(MyComponent);
 ## 5 - Authmanager
 
 ### 5.1 - `Authmanager.config`
-To edit the configuration of **react-authmanager**your toolkit, you have to override the config object:
+To edit the configuration of **react-authmanager**your manager, you have to override the config object:
 ```js
 import Authmanager from 'react-authmanager';
 
-// will change the way how the toolkit will login the user and get a token back, see below
+// will change the way how the manager will login the user and get a token back, see below
 Authmanager.fetchToken = function(credentials) {}
 ```
 
@@ -279,7 +279,7 @@ Authmanager.fetchToken = async credentials => {
 ```
 
 #### `fetchUser() [async]`
-Get the current authenticated user. `fetchUser` is called when the toolkit initialize its store and after an user login.
+Get the current authenticated user. `fetchUser` is called when the manager initialize its store and after an user login.
 
 **Return *(`Object`)***
 ```
@@ -317,7 +317,7 @@ isUserLogged = userData => !!userData && Object.keys(userData).length > 0;
 *By default, `isUserLogged` returns true if `fetchUser` returns a non-empty object*
 
 ### 5.2 - `Authmanager` utils
-**react-authmanager** also provides some utilities to manage the toolkit from your app:
+**react-authmanager** also provides some utilities to manage the manager from your app:
 ```js
 import Authmanager from 'react-authmanager';
 
@@ -361,7 +361,7 @@ Authmanager.getUser();
 ```
 
 #### `addGuard([guard])`
-Create a guard at the toolkit level, you will be able to reuse the guard just by giving its name
+Create a guard at the manager level, you will be able to reuse the guard just by giving its name
 
 **Parameters**
 - [`guard`] *(`Function`)* A function that returns a component or call the next function to render the default component.
