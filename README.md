@@ -18,12 +18,6 @@
 `npm install --save react-authmanager`, then you have to configure the package.<br/>
 To manage configuration, you need to import the default Authmanager.<br/>
 You need to configure the manager before starting to use, so your highest component file is the best place (by example, it's the `App.js` file with a [create-react-app](https://github.com/facebook/create-react-app) instance !)
-```js
-import Authmanager from 'react-authmanager';
-
-// will change the way how the manager will login the user and get a token back, see below
-Authmanager.fetchToken = function(credentials) {}
-```
 
 You can also create a new manager instance.
 ```js
