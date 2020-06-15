@@ -7,11 +7,14 @@ export default instance => HOCManager.create(Component => {
     unsubscribe;
     state = {};
 
-    componentDidMount() {
+    setState: Function;
+
+    constructor(props) {
+      super(props);
+
       this.unsubscribe = instance.store.subscribe(() => {
         const { user } = instance.store.getState();
         if (JSON.stringify(this.state) != JSON.stringify(user)) {
-          // @ts-ignore
           this.setState(user);
         }
       });
@@ -23,7 +26,7 @@ export default instance => HOCManager.create(Component => {
 
     render() {
       const { user } = instance.store.getState();
-      return <Component { ...this.props } user={ user } />
+      return <Component { ...this.props } { ...user } __user={user} />
     }
   }
 }, {

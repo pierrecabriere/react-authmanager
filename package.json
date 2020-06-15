@@ -6,7 +6,8 @@
   "author": "hello@pierrecabriere.fr",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "build:watch": "tsc -w"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,8 @@ import * as types from '../types/userTypes';
 
 const initialState = {
   loading: false,
-  logged: false
+  logged: false,
+  user: null
 };
 
 const userReducer = (state = initialState, action) => {
@@ -23,7 +24,8 @@ const userReducer = (state = initialState, action) => {
     case types.FETCH_SUCCESS:
       return {
         ...state,
-        ...action.payload
+        logged: action.payload.logged,
+        user: action.payload.user
       };
     default:
       return state;

@@ -98,18 +98,18 @@ class ReactAuth {
 
   async getUser() {
     this.store.dispatch(userActions.fetchStart());
-    let data;
+    let user;
     try {
-      data = await this.config.fetchUser();
-      data.logged = await this.config.isUserLogged(data);
-      this.store.dispatch(userActions.fetchSuccess(data));
+      user = await this.config.fetchUser();
+      const logged = await this.config.isUserLogged(user);
+      this.store.dispatch(userActions.fetchSuccess({ user, logged }));
       this.store.dispatch(userActions.fetchEnd());
     } catch (e) {
       this.store.dispatch(userActions.fetchError());
       this.store.dispatch(userActions.fetchEnd());
       throw e;
     }
-    return data;
+    return user;
   }
 }
 
