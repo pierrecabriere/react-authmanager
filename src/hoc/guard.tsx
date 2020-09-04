@@ -30,7 +30,9 @@ export default instance => HOCManager.create((Component, parameters) => {
         guard = instance.getGuard(guard);
       }
 
-      return guard(user, this.props, next) || "Guard must return a valid react component";
+      const render = guard(user, this.props, next);
+
+      return React.isValidElement(render) ? render : "Guard must return a valid react component";
     }
   }
 }, {
